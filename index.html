@@ -3,194 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>BTC ORB Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0f;--surface:#12121a;--surface2:#1a1a26;--border:#2a2a3a;--text:#e8e8f0;--muted:#6b6b8a;--bull:#00e5a0;--bear:#ff4d6d;--orange:#ff9500;--blue:#4d9fff;--yellow:#ffd60a;--purple:#b47fff}
+:root{--bg:#0a0a0f;--surface:#12121a;--surface2:#1a1a26;--border:#2a2a3a;--text:#e8e8f0;--muted:#6b6b8a;--bull:#00e5a0;--bear:#ff4d6d;--orange:#ff9500}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
-.app{max-width:440px;margin:0 auto;padding-bottom:90px;position:relative}
-.hdr{padding:52px 20px 12px;display:flex;justify-content:space-between}
-.hdr-title{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;letter-spacing:-1px}
-.hdr-title span{color:var(--orange)}
-.card,.verdict-card{margin:0 16px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px}
-.verdict-card.up{border-color:var(--bull);background:rgba(0,229,160,.08)}
-.verdict-card.down{border-color:var(--bear);background:rgba(255,77,109,.08)}
-.verdict-card.wait{border-color:var(--border)}
-.v-emoji{font-size:50px}
-.v-word{font-size:48px;font-weight:700;letter-spacing:-2px}
-.v-word.up{color:var(--bull)}.v-word.down{color:var(--bear)}.v-word.wait{color:var(--muted)}
-.v-conf{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;padding:8px 22px;border-radius:20px}
-.v-conf.up{background:rgba(0,229,160,.15);color:var(--bull)}
-.v-conf.down{background:rgba(255,77,109,.15);color:var(--bear)}
-.v-conf.wait{background:var(--surface2);color:var(--muted)}
-.toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:var(--surface2);border:1px solid var(--orange);padding:12px 20px;border-radius:12px;font-family:'Space Mono',monospace;z-index:999;opacity:0;transition:all .3s}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(10px)}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,.97);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 0 28px;z-index:100}
-.bnav-btn{color:var(--text);text-align:center;font-size:10px}
-.bnav-btn.active{color:var(--orange)}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;height:100vh;overflow:hidden}
+.splash{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:9999}
+.splash-title{font-family:'Space Mono',monospace;font-size:42px;font-weight:700;letter-spacing:-2px}
+.splash-title span{color:var(--orange)}
+.app{opacity:0;transition:opacity .6s;padding-bottom:80px}
+.card{margin:16px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:20px}
+.verdict-card{text-align:center;border:2px solid var(--border);border-radius:24px;padding:30px 20px}
+.v-word{font-size:52px;font-weight:700;letter-spacing:-3px}
+.v-conf{font-family:'Space Mono',monospace;font-size:17px;padding:10px 24px;border-radius:999px;margin-top:12px}
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:var(--surface2);padding:12px 20px;border-radius:12px;font-size:13px;z-index:9999;opacity:0;transition:all .4s}
 </style>
 </head>
 <body>
 
-<div id="loadOverlay" style="position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;z-index:9999">
-  <div style="font-family:'Space Mono',monospace;font-size:32px;font-weight:700">BTC<span style="color:#ff9500">/ORB</span></div>
-  <div style="width:220px;height:4px;background:#2a2a3a;border-radius:2px;overflow:hidden"><div id="loadBar" style="height:100%;width:0%;background:linear-gradient(90deg,#ff9500,#00e5a0);transition:width .4s"></div></div>
+<!-- SPLASH -->
+<div id="splash" class="splash">
+  <div class="splash-title">BTC/<span>ORB</span></div>
+  <div style="height:3px;width:120px;background:linear-gradient(90deg,transparent,#ff9500,transparent);margin-top:20px"></div>
 </div>
 
-<div class="app" id="mainApp" style="opacity:0">
+<!-- MAIN APP -->
+<div class="app" id="app">
 
-  <div class="hdr">
-    <div><div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px">KALSHI · ORB STRATEGY</div>
-    <div class="hdr-title">BTC<span>/USD</span></div></div>
-    <div style="background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.3);border-radius:20px;padding:6px 12px;font-size:10px;color:var(--bull);font-family:'Space Mono',monospace">LIVE</div>
+  <div style="padding:50px 20px 10px;text-align:center">
+    <div style="font-size:11px;color:var(--muted);letter-spacing:2px">KALSHI ORB STRATEGY</div>
+    <div style="font-family:'Space Mono',monospace;font-size:28px;margin-top:4px">BTC <span style="color:var(--orange)">USD</span></div>
   </div>
 
-  <!-- RISK MODE -->
-  <div style="margin:0 16px 14px">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-      <div onclick="setRiskMode('low')" id="rm-low" style="background:rgba(0,229,160,.06);border:2px solid var(--bull);border-radius:16px;padding:14px;text-align:center;cursor:pointer">LOW</div>
-      <div onclick="setRiskMode('med')" id="rm-med" style="background:rgba(255,214,10,.06);border:2px solid #ffd60a;border-radius:16px;padding:14px;text-align:center;cursor:pointer">MED</div>
-      <div onclick="setRiskMode('high')" id="rm-high" style="background:rgba(255,77,109,.06);border:2px solid var(--bear);border-radius:16px;padding:14px;text-align:center;cursor:pointer">HIGH</div>
-    </div>
+  <!-- Risk Modes -->
+  <div style="display:flex;gap:8px;padding:0 16px">
+    <div onclick="setRisk('low')" id="rm-low" style="flex:1;background:rgba(0,229,160,.1);border:2px solid #00e5a0;border-radius:16px;padding:14px;text-align:center;cursor:pointer">LOW</div>
+    <div onclick="setRisk('med')" id="rm-med" style="flex:1;background:rgba(255,214,10,.1);border:2px solid #ffd60a;border-radius:16px;padding:14px;text-align:center;cursor:pointer">MED</div>
+    <div onclick="setRisk('high')" id="rm-high" style="flex:1;background:rgba(255,77,109,.1);border:2px solid #ff4d6d;border-radius:16px;padding:14px;text-align:center;cursor:pointer">HIGH</div>
   </div>
 
-  <!-- VERDICT -->
-  <div class="verdict-card wait" id="verdictCard" style="text-align:center;position:relative">
-    <div id="lockedBadge" style="display:none;position:absolute;top:12px;right:12px;background:rgba(255,149,0,.15);color:var(--orange);font-size:10px;padding:4px 10px;border-radius:8px">🔒 LOCKED</div>
-    <button onclick="resetLock()" id="resetBtn" style="display:none;position:absolute;top:12px;left:12px;background:rgba(255,149,0,.15);color:var(--orange);border:none;padding:4px 10px;border-radius:8px;font-size:10px">RESET</button>
-    
-    <div class="v-emoji" id="vEmoji">⏳</div>
-    <div class="v-word wait" id="vWord">LOADING</div>
-    <div id="vSub" style="color:var(--muted);margin:8px 0 12px">Waiting for market data...</div>
-    <div class="v-conf wait" id="vConf">50.00% CONFIDENCE</div>
-    <div style="height:6px;background:#2a2a3a;border-radius:3px;margin-top:8px"><div id="confFill" style="height:100%;width:50%;background:var(--orange);border-radius:3px"></div></div>
-    <div id="vAmt" style="margin-top:16px;font-family:'Space Mono',monospace;font-size:28px;color:var(--muted)">$--</div>
-    <div style="font-size:9px;color:var(--muted);letter-spacing:1px">SUGGESTED BET SIZE</div>
+  <!-- Verdict -->
+  <div class="card verdict-card" id="verdict" style="margin-top:20px">
+    <div id="lockBadge" style="display:none;background:rgba(255,149,0,.2);color:var(--orange);padding:6px 14px;border-radius:999px;font-size:11px;margin-bottom:12px">🔒 LOCKED AT WINDOW OPEN</div>
+    <div id="emoji" style="font-size:68px;margin-bottom:8px">⏳</div>
+    <div id="word" style="font-size:54px;font-weight:700;letter-spacing:-2px;color:var(--muted)">WAIT</div>
+    <div id="sub" style="color:var(--muted);margin:8px 0 16px">Observing market data...</div>
+    <div id="conf" style="background:var(--surface2);color:var(--orange);padding:10px 24px;border-radius:999px;font-family:'Space Mono',monospace;font-size:16px">50% CONFIDENCE</div>
   </div>
 
-  <!-- PRICE -->
-  <div class="card">
-    <div style="font-size:34px;font-weight:700;font-family:'Space Mono',monospace" id="btcPrice">$70,816</div>
-    <div style="font-size:10px;color:var(--muted)" id="lastUpdate">Using simulated data</div>
+  <!-- Price -->
+  <div class="card" style="text-align:center">
+    <div id="price" style="font-family:'Space Mono',monospace;font-size:38px;font-weight:700">$70,842</div>
+    <div style="font-size:11px;color:var(--muted)" id="status">Simulated • Updated just now</div>
   </div>
 
-  <div style="text-align:center;margin:20px 0;color:var(--muted);font-size:11px">Data is simulated (real APIs blocked by browser CORS).<br>App is fully functional.</div>
-
+  <div style="text-align:center;margin-top:30px;color:#555;font-size:12px">
+    Data is simulated (real APIs blocked by browser)<br>
+    Change risk mode or wait 15 seconds for lock
+  </div>
 </div>
 
 <script>
-// ====================== CLEAN WORKING VERSION ======================
-let state = {
-  price: 70816, high24:71234, low24:70450, volPct:142, change:1.8,
-  buyPct:54, sellPct:46, momentum:0.35, atr:3.2, riskMulti:0.85,
-  windowOpen:70835, windowHigh:70835, windowLow:70778,
-  signal:'wait', conf:50, lastWindowKey:'', usingSimulated:true
-};
-
+// =============== FULL WORKING SCRIPT ===============
 let riskMode = 'low';
-let riskPct = 15;
 let predictionLocked = false;
-let lockedPrediction = null;
-let manualOpenPrice = null;
-let observationStartTime = Date.now();
-const OBSERVATION_DELAY = 15000;
+let observationStart = Date.now();
+let price = 70842;
 
-const MODES = {
-  low:  {minPct:0.18, confFloor:62, scale:1.2},
-  med:  {minPct:0.09, confFloor:52, scale:1.3},
-  high: {minPct:0.04, confFloor:45, scale:1.45}
+const riskConfigs = {
+  low:  { color: '#00e5a0', threshold: 0.22 },
+  med:  { color: '#ffd60a', threshold: 0.11 },
+  high: { color: '#ff4d6d', threshold: 0.05 }
 };
 
-function $(id){return document.getElementById(id);}
+function $(id){ return document.getElementById(id); }
 
-function showToast(msg){
-  const t = document.createElement('div');
-  t.className = 'toast show';
-  t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(()=>{t.style.opacity=0; setTimeout(()=>t.remove(),400);}, 2500);
-}
-
-function setRiskMode(mode){
+function setRisk(mode){
   riskMode = mode;
-  document.querySelectorAll('#rm-low,#rm-med,#rm-high').forEach(el=>el.style.borderColor = '#2a2a3a');
-  $(`rm-${mode}`).style.borderColor = mode==='low'?'#00e5a0':mode==='med'?'#ffd60a':'#ff4d6d';
-  updateVerdict();
+  document.querySelectorAll('#rm-low,#rm-med,#rm-high').forEach(el => {
+    el.style.borderColor = '#2a2a3a';
+    el.style.background = 'rgba(255,255,255,0.03)';
+  });
+  $(`rm-${mode}`).style.borderColor = riskConfigs[mode].color;
+  updateUI();
 }
 
-function resetLock(){
-  predictionLocked = false;
-  lockedPrediction = null;
-  $('lockedBadge').style.display = 'none';
-  $('resetBtn').style.display = 'none';
-  observationStartTime = Date.now();
-  showToast('Lock reset — observing new data');
-  updateVerdict();
-}
-
-function updateVerdict(){
-  const now = Date.now();
-  const canLock = (now - observationStartTime > OBSERVATION_DELAY);
-
-  const pctMove = ((state.price - (manualOpenPrice||state.windowOpen)) / (manualOpenPrice||state.windowOpen)) * 100;
-  const absMove = Math.abs(pctMove);
-  const cfg = MODES[riskMode];
-
-  let score = (absMove * 28) + (state.momentum * 35) + (state.volPct > 130 ? 18 : 0);
-  let sig = score > 35 ? (pctMove > 0 ? 'up' : 'down') : 'wait';
-  let conf = Math.min(92, Math.max(45, Math.round(40 + score * 1.1)));
-
-  if (sig !== 'wait' && !predictionLocked && canLock){
-    predictionLocked = true;
-    lockedPrediction = {sig, conf};
-    $('lockedBadge').style.display = 'block';
-    $('resetBtn').style.display = 'block';
-    showToast('🔒 Prediction locked for this window');
-  }
-
-  // Render
-  const card = $('verdictCard');
-  card.className = `verdict-card ${sig}`;
-  
-  $('vEmoji').textContent = sig==='up'?'🚀':sig==='down'?'📉':'⏳';
-  $('vWord').textContent = sig==='up'?'UP':sig==='down'?'DOWN':'WAIT';
-  $('vWord').className = `v-word ${sig}`;
-  $('vConf').textContent = conf.toFixed(0)+'% CONFIDENCE';
-  $('vConf').className = `v-conf ${sig}`;
-  $('confFill').style.width = conf+'%';
-  $('confFill').style.background = sig==='up'?'#00e5a0':sig==='down'?'#ff4d6d':'#ffd60a';
-
-  if (sig !== 'wait'){
-    $('vAmt').textContent = '$'+Math.round(state.price*0.012).toLocaleString();
-    $('vAmt').style.color = sig==='up'?'#00e5a0':'#ff4d6d';
-  } else {
-    $('vAmt').textContent = '$--';
-    $('vAmt').style.color = 'var(--muted)';
-  }
-}
-
-function simulatePrice(){
-  state.price = 70800 + Math.floor(Math.random()*280 - 80);
-  $('btcPrice').textContent = '$' + state.price.toLocaleString();
-  updateVerdict();
-}
-
-// Startup
-function startup(){
-  // Fake loading
-  let p = 0;
-  const int = setInterval(()=>{
-    p += 18;
-    $('loadBar').style.width = p+'%';
-    if (p >= 100){
-      clearInterval(int);
-      $('loadOverlay').style.opacity = 0;
-      setTimeout(()=>{ 
-        $('loadOverlay').style.display = 'none';
-        $('mainApp').style.opacity = 1;
-        setRiskMode('low');
-        simulatePrice();
-        setInterval(simulatePrice, 8000);   // gentle
+function updateUI(){
+  const timeSinceStart = Date.now()
