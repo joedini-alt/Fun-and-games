@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BTC ORB Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#12121a;--surface2:#1a1a26;--border:#2a2a3a;--text:#e8e8f0;--muted:#6b6b8a;--bull:#00e5a0;--bear:#ff4d6d;--orange:#ff9500}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;height:100vh;overflow:hidden}
+.splash{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;z-index:9999}
+.title{font-family:'Space Mono',monospace;font-size:46px;font-weight:700;letter-spacing:-2px}
+.title span{color:var(--orange)}
+.app{display:none;opacity:0;transition:opacity .8s;padding:20px;max-width:440px;margin:0 auto;height:100vh}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:16px}
+.verdict-card{text-align:center;padding:32px 20px;border:2px solid var(--border);border-radius:24px}
+.v-word{font-size:58px;font-weight:700;letter-spacing:-3px}
+.price{font-family:'Space Mono',monospace;font-size:42px;font-weight:700}
+</style>
+</head>
+<body>
+
+<div id="splash" class="splash">
+  <div class="title">BTC/<span>ORB</span></div>
+  <div style="width:160px;height:3px;background:linear-gradient(90deg,transparent,#ff9500,transparent);margin-top:30px"></div>
+</div>
+
+<div id="app" class="app">
+  <div style="text-align:center;margin-bottom:20px">
+    <div style="font-size:11px;color:var(--muted);letter-spacing:2px">OPENING RANGE BREAKOUT • KALSHI</div>
+    <div style="font-size:28px;font-weight:700;margin-top:4px">BTC <span style="color:var(--orange)">USD</span></div>
+  </div>
+
+  <div class="card">
+    <div style="color:var(--muted);font-size:13px">LIVE PRICE</div>
+    <div id="price" class="price">$70,842</div>
+  </div>
+
+  <div class="card" style="display:flex;gap:8px">
+    <div onclick="setMode(0)" id="rm0" style="flex:1;padding:14px;border:2px solid #00e5a0;border-radius:16px;text-align:center;cursor:pointer">LOW</div>
+    <div onclick="setMode(1)" id="rm1" style="flex:1;padding:14px;border:2px solid #ffd60a;border-radius:16px;text-align:center;cursor:pointer">MED</div>
+    <div onclick="setMode(2)" id="rm2" style="flex:1;padding:14px;border:2px solid #ff4d6d;border-radius:16px;text-align:center;cursor:pointer">HIGH</div>
+  </div>
+
+  <div class="verdict-card card">
+    <div id="emoji" style="font-size:72px;margin-bottom:8px">⏳</div>
+    <div id="word" class="v-word" style="color:#888">WAIT</div>
+    <div id="conf" style="margin-top:16px;font-family:'Space Mono',monospace;font-size:18px;color:#ff9500">51% CONFIDENCE</div>
+    <div id="lock" style="display:none;margin-top:12px;font-size:11px;color:var(--orange)">🔒 LOCKED FOR THIS WINDOW</div>
+  </div>
+
+  <div style="margin-top:auto;text-align:center;font-size:12px;color:#444">
+    Simulated data (real APIs blocked by browser)<br>
+    Wait 15 seconds for prediction to lock
+  </div>
+</div>
+
+<script>
+let price = 70842;
+let mode = 0;
+let locked = false;
+let startTime = Date.now();
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('#rm0,#rm1,#rm2').forEach((el,i) => {
+    el.style.borderColor = (i === m) ? (i===0?'#00e5a0':i===1?'#ffd60a':'#ff4d6d') : '#2a2a3a';
+  });
+}
+
+function update() {
+  price += Math.random() * 48 - 24;
+  document.getElementById('price').textContent = '$' + Math.round(price).toLocaleString();
+
+  const elapsed = Date.now() - startTime;
+  const canLock = elapsed > 15000;
+
+  const strength = Math.random();
+  let sig = 'WAIT';
+  let color = '#888';
+  let emoji = '⏳';
+
+  if (strength > 0.6 && canLock) {
+    sig = Math.random() > 0.5 ? 'UP' : 'DOWN';
+    color = sig === 'UP' ? '#00e5a0' : '#ff4d6d';
+    emoji = sig === 'UP' ? '🚀' : '📉';
+    if (!locked) {
+      locked = true;
+      document.getElementById('lock').style.display = 'block';
+    }
+  }
+
+  document.getElementById('emoji').textContent = emoji;
+  document.getElementById('word').textContent = sig;
+  document.getElementById('word').style.color = color;
+  document.getElementById('conf').textContent = Math.round(48 + strength * 48) + '% CONFIDENCE';
+}
+
+function startApp() {
+  setTimeout(() => {
+    document.getElementById('splash').style.opacity = '0';
+    setTimeout(() => {
+      document.getElementById('splash').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      setTimeout(() => document.getElementById('app').style.opacity = '1', 50);
+
+      setMode(0);
+      update();
+      setInterval(update, 5000);
+    }, 600);
+  }, 2000);
+}
+
+startApp();
+</script>
+</body>
+</html>
