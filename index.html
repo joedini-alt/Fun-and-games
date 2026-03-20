@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -16,285 +17,287 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .app{position:relative;z-index:1;max-width:440px;margin:0 auto;padding-bottom:90px}
 
 /* LOADING OVERLAY */
-#loadOverlay{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .5s}
+#loadOverlay{position:fixed;inset:0;background:var(–bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .5s}
 #loadOverlay.hidden{opacity:0;pointer-events:none}
-.load-logo{font-family:'Space Mono',monospace;font-size:32px;font-weight:700;letter-spacing:-1px}
-.load-logo span{color:var(--orange)}
+.load-logo{font-family:‘Space Mono’,monospace;font-size:32px;font-weight:700;letter-spacing:-1px}
+.load-logo span{color:var(–orange)}
 .load-steps{display:flex;flex-direction:column;gap:8px;min-width:220px}
-.load-step{display:flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);transition:color .3s}
-.load-step.done{color:var(--bull)}
-.load-step.active{color:var(--yellow)}
-.load-step-dot{width:8px;height:8px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background .3s}
-.load-step.done .load-step-dot{background:var(--bull)}
-.load-step.active .load-step-dot{background:var(--yellow);animation:pulse 1s infinite}
+.load-step{display:flex;align-items:center;gap:10px;font-family:‘Space Mono’,monospace;font-size:11px;color:var(–muted);transition:color .3s}
+.load-step.done{color:var(–bull)}
+.load-step.active{color:var(–yellow)}
+.load-step-dot{width:8px;height:8px;border-radius:50%;background:var(–border);flex-shrink:0;transition:background .3s}
+.load-step.done .load-step-dot{background:var(–bull)}
+.load-step.active .load-step-dot{background:var(–yellow);animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-.load-bar-wrap{width:220px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.load-bar{height:100%;background:linear-gradient(90deg,var(--orange),var(--bull));border-radius:2px;width:0%;transition:width .4s ease}
+.load-bar-wrap{width:220px;height:4px;background:var(–border);border-radius:2px;overflow:hidden}
+.load-bar{height:100%;background:linear-gradient(90deg,var(–orange),var(–bull));border-radius:2px;width:0%;transition:width .4s ease}
 
 /* HEADER */
 .hdr{padding:52px 20px 12px;display:flex;justify-content:space-between;align-items:flex-start}
-.hdr-title{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;letter-spacing:-1px}
-.hdr-title span{color:var(--orange)}
-.hdr-sub{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
-.live-pill{display:flex;align-items:center;gap:6px;background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.25);border-radius:20px;padding:6px 12px;font-family:'Space Mono',monospace;font-size:10px;color:var(--bull);letter-spacing:1px}
-.live-dot{width:7px;height:7px;background:var(--bull);border-radius:50%;animation:pulse 1.2s infinite}
-.card{margin:0 16px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px}
-.sec-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding:4px 20px 8px}
+.hdr-title{font-family:‘Space Mono’,monospace;font-size:22px;font-weight:700;letter-spacing:-1px}
+.hdr-title span{color:var(–orange)}
+.hdr-sub{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.live-pill{display:flex;align-items:center;gap:6px;background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.25);border-radius:20px;padding:6px 12px;font-family:‘Space Mono’,monospace;font-size:10px;color:var(–bull);letter-spacing:1px}
+.live-dot{width:7px;height:7px;background:var(–bull);border-radius:50%;animation:pulse 1.2s infinite}
+.card{margin:0 16px 14px;background:var(–surface);border:1px solid var(–border);border-radius:20px;padding:18px}
+.sec-label{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;padding:4px 20px 8px}
 
 /* RISK MODE */
 .rm-wrap{margin:0 16px 14px}
 .rm-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .rm-btn{border-radius:16px;padding:14px 8px;border:2px solid;text-align:center;cursor:pointer;transition:all .3s;position:relative}
 .rm-btn.low{border-color:rgba(0,229,160,.2);background:rgba(0,229,160,.04)}
-.rm-btn.low.active{border-color:var(--bull);background:rgba(0,229,160,.13);box-shadow:0 0 22px rgba(0,229,160,.22)}
+.rm-btn.low.active{border-color:var(–bull);background:rgba(0,229,160,.13);box-shadow:0 0 22px rgba(0,229,160,.22)}
 .rm-btn.med{border-color:rgba(255,214,10,.2);background:rgba(255,214,10,.04)}
-.rm-btn.med.active{border-color:var(--yellow);background:rgba(255,214,10,.13);box-shadow:0 0 22px rgba(255,214,10,.22)}
+.rm-btn.med.active{border-color:var(–yellow);background:rgba(255,214,10,.13);box-shadow:0 0 22px rgba(255,214,10,.22)}
 .rm-btn.high{border-color:rgba(255,77,109,.2);background:rgba(255,77,109,.04)}
-.rm-btn.high.active{border-color:var(--bear);background:rgba(255,77,109,.13);box-shadow:0 0 22px rgba(255,77,109,.22)}
+.rm-btn.high.active{border-color:var(–bear);background:rgba(255,77,109,.13);box-shadow:0 0 22px rgba(255,77,109,.22)}
 .rm-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;opacity:0;transition:opacity .3s}
-.rm-btn.low.active .rm-dot{background:var(--bull);opacity:1}
-.rm-btn.med.active .rm-dot{background:var(--yellow);opacity:1}
-.rm-btn.high.active .rm-dot{background:var(--bear);opacity:1}
+.rm-btn.low.active .rm-dot{background:var(–bull);opacity:1}
+.rm-btn.med.active .rm-dot{background:var(–yellow);opacity:1}
+.rm-btn.high.active .rm-dot{background:var(–bear);opacity:1}
 .rm-icon{font-size:22px;margin-bottom:5px}
-.rm-name{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;margin-bottom:3px}
-.rm-btn.low .rm-name{color:var(--bull)}.rm-btn.med .rm-name{color:var(--yellow)}.rm-btn.high .rm-name{color:var(--bear)}
-.rm-desc{font-size:10px;color:var(--muted);line-height:1.4}
+.rm-name{font-family:‘Space Mono’,monospace;font-size:11px;font-weight:700;margin-bottom:3px}
+.rm-btn.low .rm-name{color:var(–bull)}.rm-btn.med .rm-name{color:var(–yellow)}.rm-btn.high .rm-name{color:var(–bear)}
+.rm-desc{font-size:10px;color:var(–muted);line-height:1.4}
 .mode-box{margin:0 16px 14px;border-radius:16px;padding:13px 15px;border:1px solid;transition:all .4s}
 .mode-box.low{background:rgba(0,229,160,.06);border-color:rgba(0,229,160,.25)}
 .mode-box.med{background:rgba(255,214,10,.06);border-color:rgba(255,214,10,.25)}
 .mode-box.high{background:rgba(255,77,109,.06);border-color:rgba(255,77,109,.25)}
-.mb-title{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:5px}
-.mb-title.low{color:var(--bull)}.mb-title.med{color:var(--yellow)}.mb-title.high{color:var(--bear)}
-.mb-body{font-size:12px;color:var(--text);line-height:1.7}
+.mb-title{font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:5px}
+.mb-title.low{color:var(–bull)}.mb-title.med{color:var(–yellow)}.mb-title.high{color:var(–bear)}
+.mb-body{font-size:12px;color:var(–text);line-height:1.7}
 
 /* VERDICT */
 .verdict-card{margin:0 16px 14px;border-radius:24px;padding:22px;border:2px solid;text-align:center;transition:all .5s}
 .verdict-card.up{background:rgba(0,229,160,.08);border-color:rgba(0,229,160,.5);box-shadow:0 0 40px rgba(0,229,160,.25)}
 .verdict-card.down{background:rgba(255,77,109,.08);border-color:rgba(255,77,109,.5);box-shadow:0 0 40px rgba(255,77,109,.25)}
-.verdict-card.wait{background:var(--surface);border-color:var(--border)}
+.verdict-card.wait{background:var(–surface);border-color:var(–border)}
 .v-emoji{font-size:50px;line-height:1;margin-bottom:7px;display:block}
 .v-word{font-size:48px;font-weight:700;letter-spacing:-2px;line-height:1;margin-bottom:5px}
-.v-word.up{color:var(--bull)}.v-word.down{color:var(--bear)}.v-word.wait{color:var(--muted)}
-.v-sub{font-size:14px;color:var(--muted);margin-bottom:10px;line-height:1.5}
-.v-reason{font-size:12px;color:var(--text);line-height:1.65;background:rgba(0,0,0,.2);border-radius:10px;padding:10px 12px;margin-bottom:13px;text-align:left;display:none}
-.v-amt{font-family:'Space Mono',monospace;font-size:30px;font-weight:700;margin-bottom:3px}
-.v-amt.up{color:var(--bull)}.v-amt.down{color:var(--bear)}.v-amt.wait{color:var(--muted)}
-.v-amt-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px}
-.v-conf{display:inline-block;margin-top:12px;padding:8px 22px;border-radius:20px;font-family:'Space Mono',monospace;font-size:16px;font-weight:700}
-.v-conf.up{background:rgba(0,229,160,.15);color:var(--bull)}.v-conf.down{background:rgba(255,77,109,.15);color:var(--bear)}.v-conf.wait{background:var(--surface2);color:var(--muted)}
+.v-word.up{color:var(–bull)}.v-word.down{color:var(–bear)}.v-word.wait{color:var(–muted)}
+.v-sub{font-size:14px;color:var(–muted);margin-bottom:10px;line-height:1.5}
+.v-reason{font-size:12px;color:var(–text);line-height:1.65;background:rgba(0,0,0,.2);border-radius:10px;padding:10px 12px;margin-bottom:13px;text-align:left;display:none}
+.v-amt{font-family:‘Space Mono’,monospace;font-size:30px;font-weight:700;margin-bottom:3px}
+.v-amt.up{color:var(–bull)}.v-amt.down{color:var(–bear)}.v-amt.wait{color:var(–muted)}
+.v-amt-label{font-family:‘Space Mono’,monospace;font-size:10px;color:var(–muted);letter-spacing:2px}
+.v-conf{display:inline-block;margin-top:12px;padding:8px 22px;border-radius:20px;font-family:‘Space Mono’,monospace;font-size:16px;font-weight:700}
+.v-conf.up{background:rgba(0,229,160,.15);color:var(–bull)}.v-conf.down{background:rgba(255,77,109,.15);color:var(–bear)}.v-conf.wait{background:var(–surface2);color:var(–muted)}
 .conf-bar{margin-top:10px;height:6px;background:rgba(0,0,0,.2);border-radius:3px;overflow:hidden}
 .conf-bar-fill{height:100%;border-radius:3px;transition:width 1s ease}
 
 /* ORDER BOOK */
-.ob-card{margin:0 16px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px}
+.ob-card{margin:0 16px 14px;background:var(–surface);border:1px solid var(–border);border-radius:20px;padding:18px}
 .ob-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.ob-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
-.ob-badge{font-family:'Space Mono',monospace;font-size:10px;padding:3px 10px;border-radius:8px;font-weight:700}
-.ob-badge.bull{background:rgba(0,229,160,.15);color:var(--bull)}.ob-badge.bear{background:rgba(255,77,109,.15);color:var(--bear)}.ob-badge.neutral{background:var(--surface2);color:var(--muted)}
+.ob-title{font-family:‘Space Mono’,monospace;font-size:10px;color:var(–muted);letter-spacing:2px;text-transform:uppercase}
+.ob-badge{font-family:‘Space Mono’,monospace;font-size:10px;padding:3px 10px;border-radius:8px;font-weight:700}
+.ob-badge.bull{background:rgba(0,229,160,.15);color:var(–bull)}.ob-badge.bear{background:rgba(255,77,109,.15);color:var(–bear)}.ob-badge.neutral{background:var(–surface2);color:var(–muted)}
 .ob-bar-wrap{display:flex;height:20px;border-radius:10px;overflow:hidden;margin-bottom:10px}
 .ob-buys{background:linear-gradient(90deg,rgba(0,229,160,.3),rgba(0,229,160,.6));transition:width .8s ease;display:flex;align-items:center;justify-content:flex-start;padding-left:8px}
 .ob-sells{background:linear-gradient(270deg,rgba(255,77,109,.3),rgba(255,77,109,.6));transition:width .8s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:8px}
-.ob-bar-label{font-family:'Space Mono',monospace;font-size:9px;font-weight:700;color:white;white-space:nowrap}
+.ob-bar-label{font-family:‘Space Mono’,monospace;font-size:9px;font-weight:700;color:white;white-space:nowrap}
 .ob-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.ob-stat{background:var(--surface2);border-radius:10px;padding:8px;text-align:center}
-.ob-stat-val{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;margin-bottom:2px}
-.ob-stat-lbl{font-size:10px;color:var(--muted)}
-.ob-ratio-bar{height:4px;background:var(--bg);border-radius:2px;overflow:hidden;margin-top:5px}
+.ob-stat{background:var(–surface2);border-radius:10px;padding:8px;text-align:center}
+.ob-stat-val{font-family:‘Space Mono’,monospace;font-size:13px;font-weight:700;margin-bottom:2px}
+.ob-stat-lbl{font-size:10px;color:var(–muted)}
+.ob-ratio-bar{height:4px;background:var(–bg);border-radius:2px;overflow:hidden;margin-top:5px}
 .ob-ratio-fill{height:100%;border-radius:2px;transition:width .8s ease}
 
 /* TIME OF DAY */
-.tod-card{margin:0 16px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px}
+.tod-card{margin:0 16px 14px;background:var(–surface);border:1px solid var(–border);border-radius:20px;padding:18px}
 .tod-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.tod-item{background:var(--surface2);border-radius:12px;padding:10px}
-.tod-item-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.tod-item{background:var(–surface2);border-radius:12px;padding:10px}
+.tod-item-label{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
 .tod-item-val{font-size:13px;font-weight:600}
-.tod-item-sub{font-size:11px;color:var(--muted);margin-top:2px}
-.session-pill{display:inline-block;padding:3px 10px;border-radius:8px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;margin-bottom:8px}
-.session-pill.hot{background:rgba(255,149,0,.15);color:var(--orange);border:1px solid rgba(255,149,0,.3)}
-.session-pill.warm{background:rgba(77,159,255,.15);color:var(--blue);border:1px solid rgba(77,159,255,.3)}
-.session-pill.cold{background:rgba(107,107,138,.15);color:var(--muted);border:1px solid rgba(107,107,138,.3)}
+.tod-item-sub{font-size:11px;color:var(–muted);margin-top:2px}
+.session-pill{display:inline-block;padding:3px 10px;border-radius:8px;font-family:‘Space Mono’,monospace;font-size:10px;font-weight:700;margin-bottom:8px}
+.session-pill.hot{background:rgba(255,149,0,.15);color:var(–orange);border:1px solid rgba(255,149,0,.3)}
+.session-pill.warm{background:rgba(77,159,255,.15);color:var(–blue);border:1px solid rgba(77,159,255,.3)}
+.session-pill.cold{background:rgba(107,107,138,.15);color:var(–muted);border:1px solid rgba(107,107,138,.3)}
 .tod-trend-row{display:flex;gap:6px;flex-wrap:wrap}
-.trend-chip{padding:4px 10px;border-radius:8px;font-family:'Space Mono',monospace;font-size:10px}
+.trend-chip{padding:4px 10px;border-radius:8px;font-family:‘Space Mono’,monospace;font-size:10px}
 
 /* KALSHI */
-.kalshi-card{margin:0 16px 14px;border-radius:20px;padding:18px;background:var(--surface);border:1px solid var(--border)}
+.kalshi-card{margin:0 16px 14px;border-radius:20px;padding:18px;background:var(–surface);border:1px solid var(–border)}
 .k-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.k-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
-.k-badge{display:flex;align-items:center;gap:6px;background:rgba(180,127,255,.1);border:1px solid rgba(180,127,255,.25);border-radius:12px;padding:4px 10px;font-family:'Space Mono',monospace;font-size:10px;color:var(--purple)}
+.k-label{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:2px;text-transform:uppercase}
+.k-badge{display:flex;align-items:center;gap:6px;background:rgba(180,127,255,.1);border:1px solid rgba(180,127,255,.25);border-radius:12px;padding:4px 10px;font-family:‘Space Mono’,monospace;font-size:10px;color:var(–purple)}
 .irow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
-.ibox{background:var(--surface2);border-radius:12px;padding:10px;text-align:center;border:1px solid transparent;transition:all .3s}
+.ibox{background:var(–surface2);border-radius:12px;padding:10px;text-align:center;border:1px solid transparent;transition:all .3s}
 .ibox.cur{border-color:rgba(255,149,0,.4);background:rgba(255,149,0,.08)}
 .ibox.nxt{border-color:rgba(77,159,255,.3);background:rgba(77,159,255,.05)}
-.ib-time{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;margin-bottom:2px}
-.ib-lbl{font-size:10px;color:var(--muted)}.ib-lbl.cur{color:var(--orange)}.ib-lbl.nxt{color:var(--blue)}
-.cd-wrap{background:var(--surface2);border-radius:12px;padding:14px;text-align:center}
-.cd-big{font-family:'Space Mono',monospace;font-size:36px;font-weight:700;letter-spacing:2px;color:var(--yellow);transition:color .3s}
-.cd-big.urgent{color:var(--bear);animation:urgPulse .5s infinite}
+.ib-time{font-family:‘Space Mono’,monospace;font-size:13px;font-weight:700;margin-bottom:2px}
+.ib-lbl{font-size:10px;color:var(–muted)}.ib-lbl.cur{color:var(–orange)}.ib-lbl.nxt{color:var(–blue)}
+.cd-wrap{background:var(–surface2);border-radius:12px;padding:14px;text-align:center}
+.cd-big{font-family:‘Space Mono’,monospace;font-size:36px;font-weight:700;letter-spacing:2px;color:var(–yellow);transition:color .3s}
+.cd-big.urgent{color:var(–bear);animation:urgPulse .5s infinite}
 @keyframes urgPulse{0%,100%{opacity:1}50%{opacity:.4}}
-.cd-sub{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:4px}
+.cd-sub{font-family:‘Space Mono’,monospace;font-size:10px;color:var(–muted);letter-spacing:1px;margin-top:4px}
 .wrow{display:flex;gap:8px;margin-top:12px}
-.wob{flex:1;background:var(--bg);border-radius:10px;padding:8px;text-align:center}
-.wob-v{font-family:'Space Mono',monospace;font-size:12px;font-weight:700}
-.wob-l{font-size:10px;color:var(--muted)}
+.wob{flex:1;background:var(–bg);border-radius:10px;padding:8px;text-align:center}
+.wob-v{font-family:‘Space Mono’,monospace;font-size:12px;font-weight:700}
+.wob-l{font-size:10px;color:var(–muted)}
 
 /* PRICE */
-.price-big{font-family:'Space Mono',monospace;font-size:34px;font-weight:700;letter-spacing:-1px;transition:color .3s}
-.price-big.flash-up{color:var(--bull)!important}.price-big.flash-dn{color:var(--bear)!important}
-.badge{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;padding:4px 10px;border-radius:8px}
-.badge.up{background:rgba(0,229,160,.15);color:var(--bull)}.badge.dn{background:rgba(255,77,109,.15);color:var(--bear)}
+.price-big{font-family:‘Space Mono’,monospace;font-size:34px;font-weight:700;letter-spacing:-1px;transition:color .3s}
+.price-big.flash-up{color:var(–bull)!important}.price-big.flash-dn{color:var(–bear)!important}
+.badge{font-family:‘Space Mono’,monospace;font-size:12px;font-weight:700;padding:4px 10px;border-radius:8px}
+.badge.up{background:rgba(0,229,160,.15);color:var(–bull)}.badge.dn{background:rgba(255,77,109,.15);color:var(–bear)}
 .mgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
-.ml{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
-.mv{font-family:'Space Mono',monospace;font-size:12px;font-weight:700}
-.vbar-row{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:5px;margin-top:12px}
-.vbar-bg{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
-.vbar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--orange));transition:width 1s ease}
+.ml{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.mv{font-family:‘Space Mono’,monospace;font-size:12px;font-weight:700}
+.vbar-row{display:flex;justify-content:space-between;font-family:‘Space Mono’,monospace;font-size:10px;color:var(–muted);margin-bottom:5px;margin-top:12px}
+.vbar-bg{height:6px;background:var(–surface2);border-radius:3px;overflow:hidden}
+.vbar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(–blue),var(–orange));transition:width 1s ease}
 
 /* VOLATILITY */
 .vol-meter{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.vm-item{background:var(--surface2);border-radius:12px;padding:10px;text-align:center}
-.vm-val{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin-bottom:2px}
-.vm-lbl{font-size:10px;color:var(--muted)}
-.vbh{height:4px;background:var(--bg);border-radius:2px;overflow:hidden;margin-top:6px}
+.vm-item{background:var(–surface2);border-radius:12px;padding:10px;text-align:center}
+.vm-val{font-family:‘Space Mono’,monospace;font-size:14px;font-weight:700;margin-bottom:2px}
+.vm-lbl{font-size:10px;color:var(–muted)}
+.vbh{height:4px;background:var(–bg);border-radius:2px;overflow:hidden;margin-top:6px}
 .vbhf{height:100%;border-radius:2px;transition:width 1s ease}
 
 /* BANKROLL */
 .bi-wrap{position:relative;margin-bottom:12px}
-.bi-pfx{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:'Space Mono',monospace;font-size:16px;color:var(--orange);pointer-events:none}
-.bi{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px 14px 14px 28px;font-family:'Space Mono',monospace;font-size:20px;color:var(--text);outline:none;transition:border .2s}
-.bi:focus{border-color:var(--orange)}
+.bi-pfx{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:‘Space Mono’,monospace;font-size:16px;color:var(–orange);pointer-events:none}
+.bi{width:100%;background:var(–surface2);border:1px solid var(–border);border-radius:12px;padding:14px 14px 14px 28px;font-family:‘Space Mono’,monospace;font-size:20px;color:var(–text);outline:none;transition:border .2s}
+.bi:focus{border-color:var(–orange)}
 .pct-row{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
-.pct-btn{flex:1;min-width:44px;padding:8px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);cursor:pointer;transition:all .2s;text-align:center}
-.pct-btn.active{background:rgba(255,149,0,.15);border-color:rgba(255,149,0,.4);color:var(--orange)}
+.pct-btn{flex:1;min-width:44px;padding:8px 4px;background:var(–surface2);border:1px solid var(–border);border-radius:10px;font-family:‘Space Mono’,monospace;font-size:11px;color:var(–muted);cursor:pointer;transition:all .2s;text-align:center}
+.pct-btn.active{background:rgba(255,149,0,.15);border-color:rgba(255,149,0,.4);color:var(–orange)}
 .ps-card{border-radius:16px;padding:16px;border:1px solid}
 .ps-card.long{background:rgba(0,229,160,.06);border-color:rgba(0,229,160,.3)}
 .ps-card.short{background:rgba(255,77,109,.06);border-color:rgba(255,77,109,.3)}
-.ps-card.neutral{background:var(--surface2);border-color:var(--border)}
+.ps-card.neutral{background:var(–surface2);border-color:var(–border)}
 .ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 .ps-item{background:rgba(0,0,0,.2);border-radius:10px;padding:10px}
-.ps-item-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.ps-item-val{font-family:'Space Mono',monospace;font-size:13px;font-weight:700}
+.ps-item-lbl{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.ps-item-val{font-family:‘Space Mono’,monospace;font-size:13px;font-weight:700}
 
 /* RANGE */
-.rng-vis{background:var(--surface2);border-radius:12px;padding:14px;margin-bottom:12px}
+.rng-vis{background:var(–surface2);border-radius:12px;padding:14px;margin-bottom:12px}
 .rl{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.rl-lbl{font-family:'Space Mono',monospace;font-size:10px}
-.rl-val{font-family:'Space Mono',monospace;font-size:12px;font-weight:700}
-.pos-bar{position:relative;height:10px;background:var(--bg);border-radius:5px;margin:8px 0}
+.rl-lbl{font-family:‘Space Mono’,monospace;font-size:10px}
+.rl-val{font-family:‘Space Mono’,monospace;font-size:12px;font-weight:700}
+.pos-bar{position:relative;height:10px;background:var(–bg);border-radius:5px;margin:8px 0}
 .pos-fill{height:100%;border-radius:5px;transition:width 1s ease}
-.pos-dot{position:absolute;top:-3px;width:16px;height:16px;border-radius:50%;border:2px solid var(--bg);transition:left 1s ease;box-shadow:0 0 10px currentColor}
-.pbox{background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:12px}
+.pos-dot{position:absolute;top:-3px;width:16px;height:16px;border-radius:50%;border:2px solid var(–bg);transition:left 1s ease;box-shadow:0 0 10px currentColor}
+.pbox{background:var(–bg);border-radius:10px;padding:10px 12px;margin-top:12px}
 .prow{display:flex;justify-content:space-between;margin-bottom:6px}
-.prow-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px}
-.prow-val{font-family:'Space Mono',monospace;font-size:10px}
-.sbar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.prow-lbl{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:1px}
+.prow-val{font-family:‘Space Mono’,monospace;font-size:10px}
+.sbar{height:4px;background:var(–surface2);border-radius:2px;overflow:hidden}
 .sbar-fill{height:100%;border-radius:2px;transition:width 1s ease}
 
 /* MISC */
 .tab-content{display:none}.tab-content.active{display:block}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 0 28px;z-index:100}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(–border);display:flex;justify-content:space-around;padding:10px 0 28px;z-index:100}
 .bnav-btn{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:4px 16px}
-.bnav-btn .ni{font-size:22px}.bnav-btn .nl{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px}
-.bnav-btn.active .nl{color:var(--orange)}
+.bnav-btn .ni{font-size:22px}.bnav-btn .nl{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:1px}
+.bnav-btn.active .nl{color:var(–orange)}
 .rule-item{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start}
-.rule-num{font-family:'Space Mono',monospace;font-size:10px;color:var(--orange);background:rgba(255,149,0,.1);border-radius:6px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.rule-text{font-size:13px;color:var(--text);line-height:1.6}.rule-text b{color:var(--orange)}
-.hist-item{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.rule-num{font-family:‘Space Mono’,monospace;font-size:10px;color:var(–orange);background:rgba(255,149,0,.1);border-radius:6px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.rule-text{font-size:13px;color:var(–text);line-height:1.6}.rule-text b{color:var(–orange)}
+.hist-item{padding:14px 18px;border-bottom:1px solid var(–border);display:flex;justify-content:space-between;align-items:center}
 .hist-item:last-child{border-bottom:none}
-.toast{position:fixed;top:60px;left:50%;transform:translateX(-50%) translateY(-16px);background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:10px 18px;font-family:'Space Mono',monospace;font-size:12px;color:var(--text);z-index:999;opacity:0;transition:all .3s;white-space:nowrap;pointer-events:none}
+.toast{position:fixed;top:60px;left:50%;transform:translateX(-50%) translateY(-16px);background:var(–surface2);border:1px solid var(–border);border-radius:12px;padding:10px 18px;font-family:‘Space Mono’,monospace;font-size:12px;color:var(–text);z-index:999;opacity:0;transition:all .3s;white-space:nowrap;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .anim{animation:fadeUp .3s ease}
-.disclaimer{margin:0 16px 14px;padding:14px;background:rgba(255,77,109,.06);border:1px solid rgba(255,77,109,.2);border-radius:14px;font-size:12px;color:var(--muted);line-height:1.7}
-.disclaimer b{color:var(--bear)}
-.hint{margin:0 16px 12px;background:rgba(77,159,255,.08);border:1px solid rgba(77,159,255,.2);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:center;font-size:12px;color:var(--blue);line-height:1.5}
+.disclaimer{margin:0 16px 14px;padding:14px;background:rgba(255,77,109,.06);border:1px solid rgba(255,77,109,.2);border-radius:14px;font-size:12px;color:var(–muted);line-height:1.7}
+.disclaimer b{color:var(–bear)}
+.hint{margin:0 16px 12px;background:rgba(77,159,255,.08);border:1px solid rgba(77,159,255,.2);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:center;font-size:12px;color:var(–blue);line-height:1.5}
 
 /* LOCKED PREDICTION */
-.locked-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,149,0,.12);border:1px solid rgba(255,149,0,.35);border-radius:20px;padding:5px 12px;font-family:'Space Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:1px;margin-bottom:10px}
-.locked-badge svg{width:12px;height:12px;fill:var(--orange);flex-shrink:0}
+.locked-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,149,0,.12);border:1px solid rgba(255,149,0,.35);border-radius:20px;padding:5px 12px;font-family:‘Space Mono’,monospace;font-size:10px;color:var(–orange);letter-spacing:1px;margin-bottom:10px}
+.locked-badge svg{width:12px;height:12px;fill:var(–orange);flex-shrink:0}
 .verdict-locked{position:relative}
-.verdict-locked::after{content:'🔒 LOCKED';position:absolute;top:10px;right:12px;font-family:'Space Mono',monospace;font-size:9px;color:var(--orange);letter-spacing:1px;background:rgba(255,149,0,.1);border:1px solid rgba(255,149,0,.25);border-radius:8px;padding:3px 8px}
-.verdict-lock-time{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px}
+.verdict-locked::after{content:‘🔒 LOCKED’;position:absolute;top:10px;right:12px;font-family:‘Space Mono’,monospace;font-size:9px;color:var(–orange);letter-spacing:1px;background:rgba(255,149,0,.1);border:1px solid rgba(255,149,0,.25);border-radius:8px;padding:3px 8px}
+.verdict-lock-time{font-family:‘Space Mono’,monospace;font-size:10px;color:var(–muted);margin-top:6px}
 
 /* LIVE NOW MODAL */
-.live-now-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 16px 14px;padding:14px;background:rgba(77,159,255,.1);border:1px solid rgba(77,159,255,.35);border-radius:16px;cursor:pointer;transition:all .2s;font-family:'Space Mono',monospace;font-size:12px;color:var(--blue);letter-spacing:1px;font-weight:700}
+.live-now-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 16px 14px;padding:14px;background:rgba(77,159,255,.1);border:1px solid rgba(77,159,255,.35);border-radius:16px;cursor:pointer;transition:all .2s;font-family:‘Space Mono’,monospace;font-size:12px;color:var(–blue);letter-spacing:1px;font-weight:700}
 .live-now-btn:active{transform:scale(.97);opacity:.8}
-.live-now-btn .pulse-dot{width:8px;height:8px;background:var(--blue);border-radius:50%;animation:pulse 1s infinite;flex-shrink:0}
+.live-now-btn .pulse-dot{width:8px;height:8px;background:var(–blue);border-radius:50%;animation:pulse 1s infinite;flex-shrink:0}
 
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px)}
 .modal-overlay.show{opacity:1;pointer-events:all}
-.modal-sheet{background:var(--surface);border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%;max-width:440px;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,.72,0,1);border-top:1px solid var(--border)}
+.modal-sheet{background:var(–surface);border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%;max-width:440px;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,.72,0,1);border-top:1px solid var(–border)}
 .modal-overlay.show .modal-sheet{transform:translateY(0)}
-.modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px}
-.modal-title{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.modal-handle{width:36px;height:4px;background:var(–border);border-radius:2px;margin:0 auto 20px}
+.modal-title{font-family:‘Space Mono’,monospace;font-size:11px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
 .modal-verdict{border-radius:20px;padding:20px;border:2px solid;text-align:center;margin-bottom:14px;transition:all .4s}
 .modal-verdict.up{background:rgba(0,229,160,.08);border-color:rgba(0,229,160,.5);box-shadow:0 0 30px rgba(0,229,160,.2)}
 .modal-verdict.down{background:rgba(255,77,109,.08);border-color:rgba(255,77,109,.5);box-shadow:0 0 30px rgba(255,77,109,.2)}
-.modal-verdict.wait{background:var(--surface2);border-color:var(--border)}
+.modal-verdict.wait{background:var(–surface2);border-color:var(–border)}
 .modal-word{font-size:40px;font-weight:700;letter-spacing:-2px;line-height:1;margin-bottom:4px}
-.modal-word.up{color:var(--bull)}.modal-word.down{color:var(--bear)}.modal-word.wait{color:var(--muted)}
-.modal-conf{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;margin-top:8px}
-.modal-conf.up{color:var(--bull)}.modal-conf.down{color:var(--bear)}.modal-conf.wait{color:var(--muted)}
+.modal-word.up{color:var(–bull)}.modal-word.down{color:var(–bear)}.modal-word.wait{color:var(–muted)}
+.modal-conf{font-family:‘Space Mono’,monospace;font-size:15px;font-weight:700;margin-top:8px}
+.modal-conf.up{color:var(–bull)}.modal-conf.down{color:var(–bear)}.modal-conf.wait{color:var(–muted)}
 .modal-conf-bar{margin:8px 0 0;height:6px;background:rgba(0,0,0,.2);border-radius:3px;overflow:hidden}
 .modal-conf-bar-fill{height:100%;border-radius:3px;transition:width .8s ease}
-.modal-reasons{font-size:12px;color:var(--text);line-height:1.7;background:rgba(0,0,0,.15);border-radius:12px;padding:12px;text-align:left}
-.modal-close{width:100%;margin-top:14px;padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:14px;color:var(--muted);font-family:'Space Mono',monospace;font-size:12px;cursor:pointer;letter-spacing:1px;transition:all .2s}
-.modal-close:active{background:var(--border)}
-.modal-loading{text-align:center;padding:20px;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)}
+.modal-reasons{font-size:12px;color:var(–text);line-height:1.7;background:rgba(0,0,0,.15);border-radius:12px;padding:12px;text-align:left}
+.modal-close{width:100%;margin-top:14px;padding:14px;background:var(–surface2);border:1px solid var(–border);border-radius:14px;color:var(–muted);font-family:‘Space Mono’,monospace;font-size:12px;cursor:pointer;letter-spacing:1px;transition:all .2s}
+.modal-close:active{background:var(–border)}
+.modal-loading{text-align:center;padding:20px;font-family:‘Space Mono’,monospace;font-size:11px;color:var(–muted)}
 .modal-spin{display:inline-block;animation:spin 1s linear infinite;font-size:20px;margin-bottom:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* CANDLE TAB */
 .candle-tf-row{display:flex;gap:6px;margin:0 16px 14px;flex-wrap:wrap}
-.ctf-btn{flex:1;min-width:44px;padding:9px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);cursor:pointer;text-align:center;transition:all .2s}
-.ctf-btn.active{background:rgba(180,127,255,.15);border-color:var(--purple);color:var(--purple)}
+.ctf-btn{flex:1;min-width:44px;padding:9px 6px;background:var(–surface2);border:1px solid var(–border);border-radius:10px;font-family:‘Space Mono’,monospace;font-size:11px;color:var(–muted);cursor:pointer;text-align:center;transition:all .2s}
+.ctf-btn.active{background:rgba(180,127,255,.15);border-color:var(–purple);color:var(–purple)}
 
 .candle-pred-card{margin:0 16px 14px;border-radius:22px;padding:20px;border:2px solid;text-align:center;transition:all .5s}
 .candle-pred-card.bull{background:rgba(0,229,160,.08);border-color:rgba(0,229,160,.5);box-shadow:0 0 36px rgba(0,229,160,.2)}
 .candle-pred-card.bear{background:rgba(255,77,109,.08);border-color:rgba(255,77,109,.5);box-shadow:0 0 36px rgba(255,77,109,.2)}
 .candle-pred-card.doji{background:rgba(255,214,10,.06);border-color:rgba(255,214,10,.3)}
-.candle-pred-card.loading{background:var(--surface);border-color:var(--border)}
+.candle-pred-card.loading{background:var(–surface);border-color:var(–border)}
 
-.cp-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.cp-label{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
 .cp-candle{font-size:52px;margin-bottom:8px;line-height:1;display:block}
-.cp-type{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px}
-.cp-type.bull{color:var(--bull)}.cp-type.bear{color:var(--bear)}.cp-type.doji{color:var(--yellow)}.cp-type.loading{color:var(--muted)}
+.cp-type{font-family:‘Space Mono’,monospace;font-size:20px;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px}
+.cp-type.bull{color:var(–bull)}.cp-type.bear{color:var(–bear)}.cp-type.doji{color:var(–yellow)}.cp-type.loading{color:var(–muted)}
 .cp-conf-row{display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0 6px}
-.cp-conf-num{font-family:'Space Mono',monospace;font-size:18px;font-weight:700}
-.cp-conf-num.bull{color:var(--bull)}.cp-conf-num.bear{color:var(--bear)}.cp-conf-num.doji{color:var(--yellow)}
+.cp-conf-num{font-family:‘Space Mono’,monospace;font-size:18px;font-weight:700}
+.cp-conf-num.bull{color:var(–bull)}.cp-conf-num.bear{color:var(–bear)}.cp-conf-num.doji{color:var(–yellow)}
 .cp-conf-bar-wrap{flex:1;height:6px;background:rgba(0,0,0,.2);border-radius:3px;overflow:hidden}
 .cp-conf-bar{height:100%;border-radius:3px;transition:width 1s ease}
-.cp-desc{font-size:12px;color:var(--text);line-height:1.65;background:rgba(0,0,0,.2);border-radius:10px;padding:10px 12px;text-align:left;margin-top:10px}
+.cp-desc{font-size:12px;color:var(–text);line-height:1.65;background:rgba(0,0,0,.2);border-radius:10px;padding:10px 12px;text-align:left;margin-top:10px}
 
-.candle-factors-card{margin:0 16px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px}
-.cf-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.candle-factors-card{margin:0 16px 14px;background:var(–surface);border:1px solid var(–border);border-radius:20px;padding:18px}
+.cf-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(–border)}
 .cf-row:last-child{border-bottom:none}
-.cf-name{font-size:13px;color:var(--text)}
-.cf-name small{display:block;font-size:10px;color:var(--muted);margin-top:2px}
-.cf-val{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;text-align:right}
-.cf-bar-wrap{width:80px;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin-top:4px;margin-left:auto}
+.cf-name{font-size:13px;color:var(–text)}
+.cf-name small{display:block;font-size:10px;color:var(–muted);margin-top:2px}
+.cf-val{font-family:‘Space Mono’,monospace;font-size:12px;font-weight:700;text-align:right}
+.cf-bar-wrap{width:80px;height:4px;background:var(–surface2);border-radius:2px;overflow:hidden;margin-top:4px;margin-left:auto}
 .cf-bar{height:100%;border-radius:2px;transition:width .8s ease}
 
-.candle-chart{margin:0 16px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px}
-.chart-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.candle-chart{margin:0 16px 14px;background:var(–surface);border:1px solid var(–border);border-radius:20px;padding:18px}
+.chart-label{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
 .mini-chart{display:flex;align-items:flex-end;gap:3px;height:80px}
 .mc-bar{flex:1;border-radius:2px 2px 0 0;min-width:8px;transition:height .5s ease,background .3s}
-.mc-bar.bull{background:var(--bull)}.mc-bar.bear{background:var(--bear)}.mc-bar.doji{background:var(--yellow)}
+.mc-bar.bull{background:var(–bull)}.mc-bar.bear{background:var(–bear)}.mc-bar.doji{background:var(–yellow)}
 .chart-labels{display:flex;justify-content:space-between;margin-top:6px}
-.chart-lbl{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted)}
+.chart-lbl{font-family:‘Space Mono’,monospace;font-size:8px;color:var(–muted)}
 
-.candle-refresh-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 16px 14px;padding:13px;background:rgba(180,127,255,.1);border:1px solid rgba(180,127,255,.3);border-radius:14px;cursor:pointer;font-family:'Space Mono',monospace;font-size:11px;color:var(--purple);letter-spacing:1px;transition:all .2s}
+.candle-refresh-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 16px 14px;padding:13px;background:rgba(180,127,255,.1);border:1px solid rgba(180,127,255,.3);border-radius:14px;cursor:pointer;font-family:‘Space Mono’,monospace;font-size:11px;color:var(–purple);letter-spacing:1px;transition:all .2s}
 .candle-refresh-btn:active{transform:scale(.97)}
 
 /* API status badge */
-.api-status{margin:0 16px 8px;padding:8px 12px;border-radius:10px;font-family:'Space Mono',monospace;font-size:10px;display:flex;align-items:center;gap:8px}
-.api-status.ok{background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.2);color:var(--bull)}
-.api-status.warn{background:rgba(255,149,0,.08);border:1px solid rgba(255,149,0,.2);color:var(--orange)}
-.api-status.err{background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.2);color:var(--bear)}
+.api-status{margin:0 16px 8px;padding:8px 12px;border-radius:10px;font-family:‘Space Mono’,monospace;font-size:10px;display:flex;align-items:center;gap:8px}
+.api-status.ok{background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.2);color:var(–bull)}
+.api-status.warn{background:rgba(255,149,0,.08);border:1px solid rgba(255,149,0,.2);color:var(–orange)}
+.api-status.err{background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.2);color:var(–bear)}
 </style>
+
 </head>
 <body>
 
 <!-- LOADING OVERLAY -->
+
 <div id="loadOverlay">
   <div class="load-logo">BTC<span>/ORB</span></div>
   <div class="load-steps">
@@ -315,241 +318,246 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 
   <!-- TAB LIVE -->
+
   <div id="tab-live" class="tab-content active">
     <div class="hint">📲 iPhone Safari → Share → <b>Add to Home Screen</b></div>
 
-    <!-- API Status -->
-    <div class="api-status ok" id="apiStatus">✅ Live data connected</div>
+```
+<!-- API Status -->
+<div class="api-status ok" id="apiStatus">✅ Live data connected</div>
 
-    <!-- RISK MODE -->
-    <div class="sec-label">SIGNAL RISK MODE</div>
-    <div class="rm-wrap">
-      <div class="rm-row">
-        <div class="rm-btn low active" id="rm-low" onclick="setRiskMode('low')">
-          <div class="rm-dot"></div><div class="rm-icon">🟢</div>
-          <div class="rm-name">LOW</div>
-          <div class="rm-desc">High-confidence signals only. WAIT when uncertain.</div>
-        </div>
-        <div class="rm-btn med" id="rm-med" onclick="setRiskMode('med')">
-          <div class="rm-dot"></div><div class="rm-icon">🟡</div>
-          <div class="rm-name">MEDIUM</div>
-          <div class="rm-desc">Balanced signals with moderate edge required.</div>
-        </div>
-        <div class="rm-btn high" id="rm-high" onclick="setRiskMode('high')">
-          <div class="rm-dot"></div><div class="rm-icon">🔴</div>
-          <div class="rm-name">HIGH</div>
-          <div class="rm-desc">Always gives a call. Educated guess on all data.</div>
-        </div>
-      </div>
+<!-- RISK MODE -->
+<div class="sec-label">SIGNAL RISK MODE</div>
+<div class="rm-wrap">
+  <div class="rm-row">
+    <div class="rm-btn low active" id="rm-low" onclick="setRiskMode('low')">
+      <div class="rm-dot"></div><div class="rm-icon">🟢</div>
+      <div class="rm-name">LOW</div>
+      <div class="rm-desc">High-confidence signals only. WAIT when uncertain.</div>
     </div>
-    <div class="mode-box low" id="modeBox">
-      <div class="mb-title low" id="modeTitle">🟢 LOW RISK MODE</div>
-      <div class="mb-body" id="modeBody">Only signals with strong volume, clear price breakout, order book imbalance, and momentum alignment. Shows WAIT unless data is genuinely convincing. Best for conservative traders.</div>
+    <div class="rm-btn med" id="rm-med" onclick="setRiskMode('med')">
+      <div class="rm-dot"></div><div class="rm-icon">🟡</div>
+      <div class="rm-name">MEDIUM</div>
+      <div class="rm-desc">Balanced signals with moderate edge required.</div>
     </div>
+    <div class="rm-btn high" id="rm-high" onclick="setRiskMode('high')">
+      <div class="rm-dot"></div><div class="rm-icon">🔴</div>
+      <div class="rm-name">HIGH</div>
+      <div class="rm-desc">Always gives a call. Educated guess on all data.</div>
+    </div>
+  </div>
+</div>
+<div class="mode-box low" id="modeBox">
+  <div class="mb-title low" id="modeTitle">🟢 LOW RISK MODE</div>
+  <div class="mb-body" id="modeBody">Only signals with strong volume, clear price breakout, order book imbalance, and momentum alignment. Shows WAIT unless data is genuinely convincing. Best for conservative traders.</div>
+</div>
 
-    <!-- VERDICT -->
-    <div class="sec-label">YOUR KALSHI PLAY</div>
-    <div class="verdict-card wait" id="verdictCard">
-      <div class="locked-badge" id="lockedBadge" style="display:none">
-        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-        LOCKED AT WINDOW OPEN
-      </div>
-      <div class="v-emoji" id="vEmoji">⏳</div>
-      <div class="v-word wait" id="vWord">LOADING</div>
-      <div class="v-sub" id="vSub">Connecting to market data…</div>
-      <div class="v-reason" id="vReason"></div>
-      <div class="v-amt wait" id="vAmt">$--</div>
-      <div class="v-amt-label">SUGGESTED BET SIZE</div>
-      <div class="v-conf wait" id="vConf">--.--%  CONFIDENCE</div>
-      <div class="conf-bar"><div class="conf-bar-fill" id="confFill" style="width:0%;background:var(--muted)"></div></div>
-      <div class="verdict-lock-time" id="lockTimeLabel"></div>
-    </div>
+<!-- VERDICT -->
+<div class="sec-label">YOUR KALSHI PLAY</div>
+<div class="verdict-card wait" id="verdictCard">
+  <div class="locked-badge" id="lockedBadge" style="display:none">
+    <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+    LOCKED AT WINDOW OPEN
+  </div>
+  <div class="v-emoji" id="vEmoji">⏳</div>
+  <div class="v-word wait" id="vWord">LOADING</div>
+  <div class="v-sub" id="vSub">Connecting to market data…</div>
+  <div class="v-reason" id="vReason"></div>
+  <div class="v-amt wait" id="vAmt">$--</div>
+  <div class="v-amt-label">SUGGESTED BET SIZE</div>
+  <div class="v-conf wait" id="vConf">--.--%  CONFIDENCE</div>
+  <div class="conf-bar"><div class="conf-bar-fill" id="confFill" style="width:0%;background:var(--muted)"></div></div>
+  <div class="verdict-lock-time" id="lockTimeLabel"></div>
+</div>
 
-    <!-- LIVE NOW BUTTON -->
-    <div class="live-now-btn" onclick="openLiveNow()">
-      <div class="pulse-dot"></div>
-      ⚡ LIVE RIGHT NOW PREDICTION
-    </div>
+<!-- LIVE NOW BUTTON -->
+<div class="live-now-btn" onclick="openLiveNow()">
+  <div class="pulse-dot"></div>
+  ⚡ LIVE RIGHT NOW PREDICTION
+</div>
 
-    <!-- LIVE NOW MODAL -->
-    <div class="modal-overlay" id="liveNowModal" onclick="closeLiveNow(event)">
-      <div class="modal-sheet">
-        <div class="modal-handle"></div>
-        <div class="modal-title">⚡ LIVE RIGHT NOW — CURRENT DATA</div>
-        <div id="liveNowContent">
-          <div class="modal-loading"><div class="modal-spin">⏳</div><br>Analyzing current data…</div>
-        </div>
-        <button class="modal-close" onclick="closeLiveNow()">CLOSE</button>
-      </div>
+<!-- LIVE NOW MODAL -->
+<div class="modal-overlay" id="liveNowModal" onclick="closeLiveNow(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">⚡ LIVE RIGHT NOW — CURRENT DATA</div>
+    <div id="liveNowContent">
+      <div class="modal-loading"><div class="modal-spin">⏳</div><br>Analyzing current data…</div>
     </div>
+    <button class="modal-close" onclick="closeLiveNow()">CLOSE</button>
+  </div>
+</div>
 
-    <!-- ORDER BOOK -->
-    <div class="sec-label">ORDER BOOK PRESSURE</div>
-    <div class="ob-card">
-      <div class="ob-top">
-        <div class="ob-title">BUY vs SELL ORDERS</div>
-        <div class="ob-badge neutral" id="obBadge">LOADING</div>
-      </div>
-      <div class="ob-bar-wrap">
-        <div class="ob-buys" id="obBuysBar" style="width:50%"><span class="ob-bar-label" id="obBuysPct">--.--%</span></div>
-        <div class="ob-sells" id="obSellsBar" style="width:50%"><span class="ob-bar-label" id="obSellsPct">--.--%</span></div>
-      </div>
-      <div class="ob-stats">
-        <div class="ob-stat">
-          <div class="ob-stat-val" id="obBuyVol" style="color:var(--bull)">--</div>
-          <div class="ob-stat-lbl">Buy Volume</div>
-          <div class="ob-ratio-bar"><div class="ob-ratio-fill" id="obBuyBar" style="width:50%;background:var(--bull)"></div></div>
-        </div>
-        <div class="ob-stat">
-          <div class="ob-stat-val" id="obRatio" style="color:var(--orange)">--</div>
-          <div class="ob-stat-lbl">B/S Ratio</div>
-          <div class="ob-ratio-bar"><div class="ob-ratio-fill" id="obRatioBar" style="width:50%;background:var(--orange)"></div></div>
-        </div>
-        <div class="ob-stat">
-          <div class="ob-stat-val" id="obSellVol" style="color:var(--bear)">--</div>
-          <div class="ob-stat-lbl">Sell Volume</div>
-          <div class="ob-ratio-bar"><div class="ob-ratio-fill" id="obSellBar" style="width:50%;background:var(--bear)"></div></div>
-        </div>
-      </div>
-      <div style="margin-top:10px;font-size:12px;color:var(--text);line-height:1.6;background:var(--surface2);border-radius:10px;padding:9px 12px" id="obNote">Analyzing order flow…</div>
+<!-- ORDER BOOK -->
+<div class="sec-label">ORDER BOOK PRESSURE</div>
+<div class="ob-card">
+  <div class="ob-top">
+    <div class="ob-title">BUY vs SELL ORDERS</div>
+    <div class="ob-badge neutral" id="obBadge">LOADING</div>
+  </div>
+  <div class="ob-bar-wrap">
+    <div class="ob-buys" id="obBuysBar" style="width:50%"><span class="ob-bar-label" id="obBuysPct">--.--%</span></div>
+    <div class="ob-sells" id="obSellsBar" style="width:50%"><span class="ob-bar-label" id="obSellsPct">--.--%</span></div>
+  </div>
+  <div class="ob-stats">
+    <div class="ob-stat">
+      <div class="ob-stat-val" id="obBuyVol" style="color:var(--bull)">--</div>
+      <div class="ob-stat-lbl">Buy Volume</div>
+      <div class="ob-ratio-bar"><div class="ob-ratio-fill" id="obBuyBar" style="width:50%;background:var(--bull)"></div></div>
     </div>
+    <div class="ob-stat">
+      <div class="ob-stat-val" id="obRatio" style="color:var(--orange)">--</div>
+      <div class="ob-stat-lbl">B/S Ratio</div>
+      <div class="ob-ratio-bar"><div class="ob-ratio-fill" id="obRatioBar" style="width:50%;background:var(--orange)"></div></div>
+    </div>
+    <div class="ob-stat">
+      <div class="ob-stat-val" id="obSellVol" style="color:var(--bear)">--</div>
+      <div class="ob-stat-lbl">Sell Volume</div>
+      <div class="ob-ratio-bar"><div class="ob-ratio-fill" id="obSellBar" style="width:50%;background:var(--bear)"></div></div>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text);line-height:1.6;background:var(--surface2);border-radius:10px;padding:9px 12px" id="obNote">Analyzing order flow…</div>
+</div>
 
-    <!-- TIME OF DAY -->
-    <div class="sec-label">TIME-OF-DAY ANALYSIS</div>
-    <div class="tod-card">
-      <div id="sessionPill" class="session-pill hot">NY SESSION</div>
-      <div class="tod-grid">
-        <div class="tod-item">
-          <div class="tod-item-label">Session</div>
-          <div class="tod-item-val" id="todSession">--</div>
-          <div class="tod-item-sub" id="todSessionSub">--</div>
-        </div>
-        <div class="tod-item">
-          <div class="tod-item-label">Historical Bias</div>
-          <div class="tod-item-val" id="todBias">--</div>
-          <div class="tod-item-sub" id="todBiasSub">--</div>
-        </div>
-        <div class="tod-item">
-          <div class="tod-item-label">Vol Pattern</div>
-          <div class="tod-item-val" id="todVol">--</div>
-          <div class="tod-item-sub" id="todVolSub">--</div>
-        </div>
-        <div class="tod-item">
-          <div class="tod-item-label">Trend Strength</div>
-          <div class="tod-item-val" id="todStrength">--</div>
-          <div class="tod-item-sub" id="todStrengthSub">--</div>
-        </div>
-      </div>
-      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:6px">ACTIVE FACTORS</div>
-      <div class="tod-trend-row" id="todFactors"></div>
+<!-- TIME OF DAY -->
+<div class="sec-label">TIME-OF-DAY ANALYSIS</div>
+<div class="tod-card">
+  <div id="sessionPill" class="session-pill hot">NY SESSION</div>
+  <div class="tod-grid">
+    <div class="tod-item">
+      <div class="tod-item-label">Session</div>
+      <div class="tod-item-val" id="todSession">--</div>
+      <div class="tod-item-sub" id="todSessionSub">--</div>
     </div>
+    <div class="tod-item">
+      <div class="tod-item-label">Historical Bias</div>
+      <div class="tod-item-val" id="todBias">--</div>
+      <div class="tod-item-sub" id="todBiasSub">--</div>
+    </div>
+    <div class="tod-item">
+      <div class="tod-item-label">Vol Pattern</div>
+      <div class="tod-item-val" id="todVol">--</div>
+      <div class="tod-item-sub" id="todVolSub">--</div>
+    </div>
+    <div class="tod-item">
+      <div class="tod-item-label">Trend Strength</div>
+      <div class="tod-item-val" id="todStrength">--</div>
+      <div class="tod-item-sub" id="todStrengthSub">--</div>
+    </div>
+  </div>
+  <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:6px">ACTIVE FACTORS</div>
+  <div class="tod-trend-row" id="todFactors"></div>
+</div>
 
-    <!-- KALSHI TIMER -->
-    <div class="sec-label">KALSHI WINDOW TIMER</div>
-    <div class="kalshi-card">
-      <div class="k-top"><div class="k-label">15-MIN · CLOCK SYNCED</div><div class="k-badge">⏱ KALSHI</div></div>
-      <div class="irow">
-        <div class="ibox"><div class="ib-time" id="prevTime">--:--</div><div class="ib-lbl">Previous</div></div>
-        <div class="ibox cur"><div class="ib-time" id="currTime">--:--</div><div class="ib-lbl cur">▶ Current</div></div>
-        <div class="ibox nxt"><div class="ib-time" id="nextTime">--:--</div><div class="ib-lbl nxt">Next ›</div></div>
+<!-- KALSHI TIMER -->
+<div class="sec-label">KALSHI WINDOW TIMER</div>
+<div class="kalshi-card">
+  <div class="k-top"><div class="k-label">15-MIN · CLOCK SYNCED</div><div class="k-badge">⏱ KALSHI</div></div>
+  <div class="irow">
+    <div class="ibox"><div class="ib-time" id="prevTime">--:--</div><div class="ib-lbl">Previous</div></div>
+    <div class="ibox cur"><div class="ib-time" id="currTime">--:--</div><div class="ib-lbl cur">▶ Current</div></div>
+    <div class="ibox nxt"><div class="ib-time" id="nextTime">--:--</div><div class="ib-lbl nxt">Next ›</div></div>
+  </div>
+  <div class="cd-wrap">
+    <div class="cd-big" id="countdown">00:00</div>
+    <div class="cd-sub">UNTIL NEXT KALSHI WINDOW</div>
+  </div>
+  <div class="wrow">
+    <div class="wob"><div class="wob-v" style="color:var(--bear)" id="windowHigh">$---</div><div class="wob-l">Window High</div></div>
+    <div class="wob"><div class="wob-v" style="color:var(--blue)" id="windowOpen">$---</div><div class="wob-l">Window Open</div></div>
+    <div class="wob"><div class="wob-v" style="color:var(--bull)" id="windowLow">$---</div><div class="wob-l">Window Low</div></div>
+  </div>
+  <div style="margin-top:14px;background:var(--surface2);border-radius:14px;padding:12px 14px">
+    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">✏️ CORRECT OPEN PRICE</div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div style="position:relative;flex:1">
+        <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-family:'Space Mono',monospace;font-size:13px;color:var(--orange);pointer-events:none">$</span>
+        <input id="manualOpenInput" type="number" placeholder="e.g. 83420" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 10px 10px 22px;font-family:'Space Mono',monospace;font-size:14px;color:var(--text);outline:none" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'">
       </div>
-      <div class="cd-wrap">
-        <div class="cd-big" id="countdown">00:00</div>
-        <div class="cd-sub">UNTIL NEXT KALSHI WINDOW</div>
-      </div>
-      <div class="wrow">
-        <div class="wob"><div class="wob-v" style="color:var(--bear)" id="windowHigh">$---</div><div class="wob-l">Window High</div></div>
-        <div class="wob"><div class="wob-v" style="color:var(--blue)" id="windowOpen">$---</div><div class="wob-l">Window Open</div></div>
-        <div class="wob"><div class="wob-v" style="color:var(--bull)" id="windowLow">$---</div><div class="wob-l">Window Low</div></div>
-      </div>
-      <div style="margin-top:14px;background:var(--surface2);border-radius:14px;padding:12px 14px">
-        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">✏️ CORRECT OPEN PRICE</div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <div style="position:relative;flex:1">
-            <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-family:'Space Mono',monospace;font-size:13px;color:var(--orange);pointer-events:none">$</span>
-            <input id="manualOpenInput" type="number" placeholder="e.g. 83420" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 10px 10px 22px;font-family:'Space Mono',monospace;font-size:14px;color:var(--text);outline:none" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'">
-          </div>
-          <button onclick="applyManualOpen()" style="padding:10px 16px;background:rgba(255,149,0,.15);border:1px solid rgba(255,149,0,.4);border-radius:10px;color:var(--orange);font-family:'Space Mono',monospace;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">SET</button>
-          <button onclick="resetManualOpen()" style="padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-family:'Space Mono',monospace;font-size:12px;cursor:pointer">AUTO</button>
-        </div>
-        <div id="manualOpenStatus" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px">Using auto-detected open price</div>
-      </div>
+      <button onclick="applyManualOpen()" style="padding:10px 16px;background:rgba(255,149,0,.15);border:1px solid rgba(255,149,0,.4);border-radius:10px;color:var(--orange);font-family:'Space Mono',monospace;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">SET</button>
+      <button onclick="resetManualOpen()" style="padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-family:'Space Mono',monospace;font-size:12px;cursor:pointer">AUTO</button>
     </div>
+    <div id="manualOpenStatus" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px">Using auto-detected open price</div>
+  </div>
+</div>
 
-    <!-- PRICE -->
-    <div class="sec-label">LIVE BTC PRICE</div>
-    <div class="card" style="position:relative;overflow:hidden">
-      <div style="position:absolute;right:-10px;top:-10px;font-size:110px;color:rgba(255,149,0,.04);font-family:'Space Mono',monospace;pointer-events:none">₿</div>
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4px">
-        <div class="price-big" id="btcPrice">$---</div>
-        <div class="badge" id="priceChange">--%</div>
-      </div>
-      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:10px" id="lastUpdate">Connecting…</div>
-      <div class="mgrid">
-        <div><div class="ml">24H HIGH</div><div class="mv" id="high24">--</div></div>
-        <div><div class="ml">24H LOW</div><div class="mv" id="low24">--</div></div>
-        <div><div class="ml">VOL 24H</div><div class="mv" id="vol24">--</div></div>
-      </div>
-      <div class="vbar-row"><span>Volume vs Avg</span><span id="volPctLabel">--.--%</span></div>
-      <div class="vbar-bg"><div class="vbar-fill" id="volBar" style="width:0%"></div></div>
-    </div>
+<!-- PRICE -->
+<div class="sec-label">LIVE BTC PRICE</div>
+<div class="card" style="position:relative;overflow:hidden">
+  <div style="position:absolute;right:-10px;top:-10px;font-size:110px;color:rgba(255,149,0,.04);font-family:'Space Mono',monospace;pointer-events:none">₿</div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4px">
+    <div class="price-big" id="btcPrice">$---</div>
+    <div class="badge" id="priceChange">--%</div>
+  </div>
+  <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:10px" id="lastUpdate">Connecting…</div>
+  <div class="mgrid">
+    <div><div class="ml">24H HIGH</div><div class="mv" id="high24">--</div></div>
+    <div><div class="ml">24H LOW</div><div class="mv" id="low24">--</div></div>
+    <div><div class="ml">VOL 24H</div><div class="mv" id="vol24">--</div></div>
+  </div>
+  <div class="vbar-row"><span>Volume vs Avg</span><span id="volPctLabel">--.--%</span></div>
+  <div class="vbar-bg"><div class="vbar-fill" id="volBar" style="width:0%"></div></div>
+</div>
 
-    <!-- VOLATILITY -->
-    <div class="sec-label">VOLATILITY</div>
-    <div class="card">
-      <div class="vol-meter">
-        <div class="vm-item"><div class="vm-val" id="atrVal" style="color:var(--orange)">--.--%</div><div class="vm-lbl">ATR Daily</div><div class="vbh"><div class="vbhf" id="atrBar" style="width:0%;background:var(--orange)"></div></div></div>
-        <div class="vm-item"><div class="vm-val" id="volatRating" style="color:var(--yellow)">--</div><div class="vm-lbl">Rating</div><div class="vbh"><div class="vbhf" id="volatBar" style="width:0%;background:var(--yellow)"></div></div></div>
-        <div class="vm-item"><div class="vm-val" id="riskMulti" style="color:var(--purple)">--x</div><div class="vm-lbl">Risk Scale</div><div class="vbh"><div class="vbhf" id="riskBar" style="width:0%;background:var(--purple)"></div></div></div>
-      </div>
-      <div style="margin-top:12px;font-size:12px;color:var(--text);line-height:1.6;background:var(--surface2);border-radius:10px;padding:10px 12px" id="volatNote">Analyzing…</div>
-    </div>
+<!-- VOLATILITY -->
+<div class="sec-label">VOLATILITY</div>
+<div class="card">
+  <div class="vol-meter">
+    <div class="vm-item"><div class="vm-val" id="atrVal" style="color:var(--orange)">--.--%</div><div class="vm-lbl">ATR Daily</div><div class="vbh"><div class="vbhf" id="atrBar" style="width:0%;background:var(--orange)"></div></div></div>
+    <div class="vm-item"><div class="vm-val" id="volatRating" style="color:var(--yellow)">--</div><div class="vm-lbl">Rating</div><div class="vbh"><div class="vbhf" id="volatBar" style="width:0%;background:var(--yellow)"></div></div></div>
+    <div class="vm-item"><div class="vm-val" id="riskMulti" style="color:var(--purple)">--x</div><div class="vm-lbl">Risk Scale</div><div class="vbh"><div class="vbhf" id="riskBar" style="width:0%;background:var(--purple)"></div></div></div>
+  </div>
+  <div style="margin-top:12px;font-size:12px;color:var(--text);line-height:1.6;background:var(--surface2);border-radius:10px;padding:10px 12px" id="volatNote">Analyzing…</div>
+</div>
 
-    <!-- ORB RANGE -->
-    <div class="sec-label">ORB RANGE</div>
-    <div class="card">
-      <div class="rng-vis">
-        <div class="rl"><div class="rl-lbl" style="color:var(--bear)">▼ WINDOW HIGH</div><div class="rl-val" style="color:var(--bear)" id="orbH">$---</div></div>
-        <div class="pos-bar">
-          <div class="pos-fill" id="posFill" style="width:50%;background:linear-gradient(90deg,rgba(77,159,255,.3),var(--blue))"></div>
-          <div class="pos-dot" id="posDot" style="left:calc(50% - 8px);background:var(--blue);color:var(--blue)"></div>
-        </div>
-        <div class="rl"><div class="rl-lbl" style="color:var(--bull)">▲ WINDOW LOW</div><div class="rl-val" style="color:var(--bull)" id="orbL">$---</div></div>
-        <div style="text-align:center;font-family:'Space Mono',monospace;font-size:11px;color:var(--blue);margin-top:4px">NOW: <span id="nowPrice">$---</span></div>
-      </div>
-      <div class="pbox">
-        <div class="prow"><div class="prow-lbl">MOMENTUM</div><div class="prow-val" id="presLbl" style="color:var(--muted)">⏸ NEUTRAL</div></div>
-        <div class="sbar"><div class="sbar-fill" id="presFill" style="width:50%;background:var(--blue)"></div></div>
-      </div>
+<!-- ORB RANGE -->
+<div class="sec-label">ORB RANGE</div>
+<div class="card">
+  <div class="rng-vis">
+    <div class="rl"><div class="rl-lbl" style="color:var(--bear)">▼ WINDOW HIGH</div><div class="rl-val" style="color:var(--bear)" id="orbH">$---</div></div>
+    <div class="pos-bar">
+      <div class="pos-fill" id="posFill" style="width:50%;background:linear-gradient(90deg,rgba(77,159,255,.3),var(--blue))"></div>
+      <div class="pos-dot" id="posDot" style="left:calc(50% - 8px);background:var(--blue);color:var(--blue)"></div>
     </div>
+    <div class="rl"><div class="rl-lbl" style="color:var(--bull)">▲ WINDOW LOW</div><div class="rl-val" style="color:var(--bull)" id="orbL">$---</div></div>
+    <div style="text-align:center;font-family:'Space Mono',monospace;font-size:11px;color:var(--blue);margin-top:4px">NOW: <span id="nowPrice">$---</span></div>
+  </div>
+  <div class="pbox">
+    <div class="prow"><div class="prow-lbl">MOMENTUM</div><div class="prow-val" id="presLbl" style="color:var(--muted)">⏸ NEUTRAL</div></div>
+    <div class="sbar"><div class="sbar-fill" id="presFill" style="width:50%;background:var(--blue)"></div></div>
+  </div>
+</div>
 
-    <!-- BANKROLL -->
-    <div class="sec-label">YOUR BANKROLL</div>
-    <div class="card">
-      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:10px">TOTAL BANKROLL</div>
-      <div class="bi-wrap"><div class="bi-pfx">$</div><input class="bi" type="number" id="bankrollInput" placeholder="1000" min="10" oninput="calcPosition()"></div>
-      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:8px">% TO RISK PER TRADE</div>
-      <div class="pct-row">
-        <div class="pct-btn" onclick="setPct(5,this)">5%</div>
-        <div class="pct-btn" onclick="setPct(10,this)">10%</div>
-        <div class="pct-btn active" onclick="setPct(15,this)">15%</div>
-        <div class="pct-btn" onclick="setPct(20,this)">20%</div>
-        <div class="pct-btn" onclick="setPct(25,this)">25%</div>
-      </div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5;padding:8px 10px;background:var(--surface2);border-radius:8px">⚠️ These are Kalshi-sized bets, not full portfolio trades. Still — never bet what you can't lose. Volatility adjustment will reduce these on wild days.</div>
-      <div class="ps-card neutral" id="psCard">
-        <div id="psEmpty" style="font-size:13px;color:var(--muted)">Enter your bankroll above to see bet sizing</div>
-        <div class="ps-grid" id="psGrid" style="display:none">
-          <div class="ps-item"><div class="ps-item-lbl">Bet Amount</div><div class="ps-item-val" id="psBet" style="color:var(--orange)">$--</div></div>
-          <div class="ps-item"><div class="ps-item-lbl">Max Risk</div><div class="ps-item-val" id="psRisk" style="color:var(--bear)">$--</div></div>
-          <div class="ps-item"><div class="ps-item-lbl">Potential Win</div><div class="ps-item-val" id="psWin" style="color:var(--bull)">$--</div></div>
-          <div class="ps-item"><div class="ps-item-lbl">BTC Equivalent</div><div class="ps-item-val" id="psBtc" style="color:var(--blue)">-- BTC</div></div>
-        </div>
-        <div id="psWarn" style="display:none;margin-top:10px;padding:8px 10px;background:rgba(255,149,0,.1);border:1px solid rgba(255,149,0,.25);border-radius:8px;font-size:11px;color:var(--orange);line-height:1.5"></div>
-        <div id="psNote" style="display:none;margin-top:8px;padding:8px 10px;background:rgba(77,159,255,.08);border:1px solid rgba(77,159,255,.2);border-radius:8px;font-size:11px;color:var(--blue);line-height:1.5"></div>
-      </div>
+<!-- BANKROLL -->
+<div class="sec-label">YOUR BANKROLL</div>
+<div class="card">
+  <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:10px">TOTAL BANKROLL</div>
+  <div class="bi-wrap"><div class="bi-pfx">$</div><input class="bi" type="number" id="bankrollInput" placeholder="1000" min="10" oninput="calcPosition()"></div>
+  <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:8px">% TO RISK PER TRADE</div>
+  <div class="pct-row">
+    <div class="pct-btn" onclick="setPct(5,this)">5%</div>
+    <div class="pct-btn" onclick="setPct(10,this)">10%</div>
+    <div class="pct-btn active" onclick="setPct(15,this)">15%</div>
+    <div class="pct-btn" onclick="setPct(20,this)">20%</div>
+    <div class="pct-btn" onclick="setPct(25,this)">25%</div>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5;padding:8px 10px;background:var(--surface2);border-radius:8px">⚠️ These are Kalshi-sized bets, not full portfolio trades. Still — never bet what you can't lose. Volatility adjustment will reduce these on wild days.</div>
+  <div class="ps-card neutral" id="psCard">
+    <div id="psEmpty" style="font-size:13px;color:var(--muted)">Enter your bankroll above to see bet sizing</div>
+    <div class="ps-grid" id="psGrid" style="display:none">
+      <div class="ps-item"><div class="ps-item-lbl">Bet Amount</div><div class="ps-item-val" id="psBet" style="color:var(--orange)">$--</div></div>
+      <div class="ps-item"><div class="ps-item-lbl">Max Risk</div><div class="ps-item-val" id="psRisk" style="color:var(--bear)">$--</div></div>
+      <div class="ps-item"><div class="ps-item-lbl">Potential Win</div><div class="ps-item-val" id="psWin" style="color:var(--bull)">$--</div></div>
+      <div class="ps-item"><div class="ps-item-lbl">BTC Equivalent</div><div class="ps-item-val" id="psBtc" style="color:var(--blue)">-- BTC</div></div>
     </div>
+    <div id="psWarn" style="display:none;margin-top:10px;padding:8px 10px;background:rgba(255,149,0,.1);border:1px solid rgba(255,149,0,.25);border-radius:8px;font-size:11px;color:var(--orange);line-height:1.5"></div>
+    <div id="psNote" style="display:none;margin-top:8px;padding:8px 10px;background:rgba(77,159,255,.08);border:1px solid rgba(77,159,255,.2);border-radius:8px;font-size:11px;color:var(--blue);line-height:1.5"></div>
+  </div>
+</div>
+```
+
   <!-- COPY SNAPSHOT FOR CLAUDE AI ANALYSIS -->
+
   <div class="sec-label">AI ANALYSIS (VIA CLAUDE CHAT)</div>
   <div style="margin:0 16px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px">
     <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px">
@@ -564,6 +572,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div><!-- /tab-live -->
 
   <!-- TAB STRATEGY -->
+
   <div id="tab-strategy" class="tab-content">
     <div class="anim">
       <div class="sec-label">RISK MODE GUIDE</div>
@@ -584,6 +593,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 
   <!-- TAB HISTORY -->
+
   <div id="tab-history" class="tab-content">
     <div class="anim">
       <div class="sec-label">RECENT WINDOWS (SIMULATED)</div>
@@ -599,6 +609,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 
   <!-- TAB SETTINGS -->
+
   <div id="tab-settings" class="tab-content">
     <div class="anim">
       <div class="sec-label">SETTINGS</div>
@@ -611,6 +622,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 
   <!-- TAB CANDLES -->
+
   <div id="tab-candles" class="tab-content">
     <div class="anim">
       <div class="sec-label">CANDLE TIMEFRAME</div>
@@ -623,74 +635,76 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         <div class="ctf-btn"        id="ctf-1d"  onclick="setCandleTF('1d',this)">1D</div>
       </div>
 
-      <div class="sec-label">NEXT CANDLE PREDICTION</div>
-      <div class="candle-pred-card loading" id="cpCard">
-        <div class="cp-label" id="cpLabel">LOADING…</div>
-        <div class="cp-candle" id="cpCandle">⏳</div>
-        <div class="cp-type loading" id="cpType">Analyzing…</div>
-        <div class="cp-conf-row">
-          <div class="cp-conf-num" id="cpConf" style="color:var(--muted)">--.--</div>
-          <div class="cp-conf-bar-wrap"><div class="cp-conf-bar" id="cpConfBar" style="width:0%;background:var(--muted)"></div></div>
-          <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)">%</div>
-        </div>
-        <div class="cp-desc" id="cpDesc">Fetching candle data…</div>
-      </div>
+```
+  <div class="sec-label">NEXT CANDLE PREDICTION</div>
+  <div class="candle-pred-card loading" id="cpCard">
+    <div class="cp-label" id="cpLabel">LOADING…</div>
+    <div class="cp-candle" id="cpCandle">⏳</div>
+    <div class="cp-type loading" id="cpType">Analyzing…</div>
+    <div class="cp-conf-row">
+      <div class="cp-conf-num" id="cpConf" style="color:var(--muted)">--.--</div>
+      <div class="cp-conf-bar-wrap"><div class="cp-conf-bar" id="cpConfBar" style="width:0%;background:var(--muted)"></div></div>
+      <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)">%</div>
+    </div>
+    <div class="cp-desc" id="cpDesc">Fetching candle data…</div>
+  </div>
 
-      <div class="sec-label">CANDLE SIGNAL FACTORS</div>
-      <div class="candle-factors-card">
-        <div class="cf-row">
-          <div class="cf-name">Body Size<small>Candle body vs range</small></div>
-          <div><div class="cf-val" id="cfBody" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfBodyBar" style="width:0%;background:var(--muted)"></div></div></div>
-        </div>
-        <div class="cf-row">
-          <div class="cf-name">Upper Wick<small>Rejection at highs</small></div>
-          <div><div class="cf-val" id="cfUWick" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfUWickBar" style="width:0%;background:var(--muted)"></div></div></div>
-        </div>
-        <div class="cf-row">
-          <div class="cf-name">Lower Wick<small>Rejection at lows</small></div>
-          <div><div class="cf-val" id="cfLWick" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfLWickBar" style="width:0%;background:var(--muted)"></div></div></div>
-        </div>
-        <div class="cf-row">
-          <div class="cf-name">Trend (Last 5)<small>Candle streak direction</small></div>
-          <div><div class="cf-val" id="cfTrend" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfTrendBar" style="width:0%;background:var(--muted)"></div></div></div>
-        </div>
-        <div class="cf-row">
-          <div class="cf-name">Volume Spike<small>vs recent average</small></div>
-          <div><div class="cf-val" id="cfVolSpike" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfVolSpikeBar" style="width:0%;background:var(--muted)"></div></div></div>
-        </div>
-        <div class="cf-row">
-          <div class="cf-name">Pattern Detected<small>Classic candle patterns</small></div>
-          <div class="cf-val" id="cfPattern" style="color:var(--muted);text-align:right;max-width:140px">--</div>
-        </div>
-        <div class="cf-row">
-          <div class="cf-name">RSI Estimate<small>Overbought / oversold</small></div>
-          <div><div class="cf-val" id="cfRSI" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfRSIBar" style="width:0%;background:var(--muted)"></div></div></div>
-        </div>
-      </div>
-
-      <div class="candle-chart">
-        <div class="chart-label">LAST 12 CANDLES · <span id="chartTFLabel">1m</span></div>
-        <div class="mini-chart" id="miniChart"></div>
-        <div class="chart-labels"><span class="chart-lbl">12 candles ago</span><span class="chart-lbl">now</span></div>
-        <div style="display:flex;gap:12px;margin-top:10px">
-          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--bull)">▉ Bullish</div>
-          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--bear)">▉ Bearish</div>
-          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--yellow)">▉ Doji</div>
-        </div>
-      </div>
-
-      <div class="candle-refresh-btn" id="candleRefreshBtn" onclick="refreshCandles()">
-        <span id="candleRefreshIcon">🕯</span> REFRESH CANDLE DATA
-      </div>
-
-      <div style="margin:0 16px 14px;padding:12px 14px;background:rgba(107,107,138,.06);border:1px solid rgba(107,107,138,.2);border-radius:14px;font-size:11px;color:var(--muted);line-height:1.6">
-        📌 Candle predictions use Kraken OHLCV data and classic pattern recognition. They indicate what the <b style="color:var(--text)">next candle is likely to do</b> based on the current candle's structure and recent context — not a guarantee.
-      </div>
+  <div class="sec-label">CANDLE SIGNAL FACTORS</div>
+  <div class="candle-factors-card">
+    <div class="cf-row">
+      <div class="cf-name">Body Size<small>Candle body vs range</small></div>
+      <div><div class="cf-val" id="cfBody" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfBodyBar" style="width:0%;background:var(--muted)"></div></div></div>
+    </div>
+    <div class="cf-row">
+      <div class="cf-name">Upper Wick<small>Rejection at highs</small></div>
+      <div><div class="cf-val" id="cfUWick" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfUWickBar" style="width:0%;background:var(--muted)"></div></div></div>
+    </div>
+    <div class="cf-row">
+      <div class="cf-name">Lower Wick<small>Rejection at lows</small></div>
+      <div><div class="cf-val" id="cfLWick" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfLWickBar" style="width:0%;background:var(--muted)"></div></div></div>
+    </div>
+    <div class="cf-row">
+      <div class="cf-name">Trend (Last 5)<small>Candle streak direction</small></div>
+      <div><div class="cf-val" id="cfTrend" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfTrendBar" style="width:0%;background:var(--muted)"></div></div></div>
+    </div>
+    <div class="cf-row">
+      <div class="cf-name">Volume Spike<small>vs recent average</small></div>
+      <div><div class="cf-val" id="cfVolSpike" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfVolSpikeBar" style="width:0%;background:var(--muted)"></div></div></div>
+    </div>
+    <div class="cf-row">
+      <div class="cf-name">Pattern Detected<small>Classic candle patterns</small></div>
+      <div class="cf-val" id="cfPattern" style="color:var(--muted);text-align:right;max-width:140px">--</div>
+    </div>
+    <div class="cf-row">
+      <div class="cf-name">RSI Estimate<small>Overbought / oversold</small></div>
+      <div><div class="cf-val" id="cfRSI" style="color:var(--muted)">--</div><div class="cf-bar-wrap"><div class="cf-bar" id="cfRSIBar" style="width:0%;background:var(--muted)"></div></div></div>
     </div>
   </div>
 
-</div><!-- /app -->
+  <div class="candle-chart">
+    <div class="chart-label">LAST 12 CANDLES · <span id="chartTFLabel">1m</span></div>
+    <div class="mini-chart" id="miniChart"></div>
+    <div class="chart-labels"><span class="chart-lbl">12 candles ago</span><span class="chart-lbl">now</span></div>
+    <div style="display:flex;gap:12px;margin-top:10px">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--bull)">▉ Bullish</div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--bear)">▉ Bearish</div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--yellow)">▉ Doji</div>
+    </div>
+  </div>
 
+  <div class="candle-refresh-btn" id="candleRefreshBtn" onclick="refreshCandles()">
+    <span id="candleRefreshIcon">🕯</span> REFRESH CANDLE DATA
+  </div>
+
+  <div style="margin:0 16px 14px;padding:12px 14px;background:rgba(107,107,138,.06);border:1px solid rgba(107,107,138,.2);border-radius:14px;font-size:11px;color:var(--muted);line-height:1.6">
+    📌 Candle predictions use Kraken OHLCV data and classic pattern recognition. They indicate what the <b style="color:var(--text)">next candle is likely to do</b> based on the current candle's structure and recent context — not a guarantee.
+  </div>
+</div>
+```
+
+  </div>
+
+</div><!-- /app -->
 
 <div class="bnav">
   <button class="bnav-btn active" onclick="switchTab('live',this)"><div class="ni">📊</div><div class="nl">LIVE</div></button>
@@ -1126,11 +1140,58 @@ function updateVerdict(){
 
   const price=state.price, wOpen=state.windowOpen||state.price;
   const wHigh=state.windowHigh||state.price, wLow=state.windowLow||state.price;
-  const volPct=state.volPct||100;
-  const effectiveMode = (!state.high24) ? 'high' : riskMode;
-  const cfg=MODES[effectiveMode];
-  const pctMove=((price-wOpen)/wOpen)*100, absPct=Math.abs(pctMove);
-  const volStrong=volPct>=settings.volThresh;
+
+  // Stats guard — never default volPct to 100 before stats arrive
+  const statsLoaded = !!state.high24;
+  const volPct = statsLoaded ? (state.volPct || 0) : 0;
+  const effectiveMode = !statsLoaded ? 'high' : riskMode;
+  const cfg = MODES[effectiveMode];
+
+  const pctMove  = ((price - wOpen) / wOpen) * 100;
+  const absPct   = Math.abs(pctMove);
+
+  // ── CUSHION MODEL ────────────────────────────────────────────
+  // Core insight: Kalshi pays on close vs open, not on current direction.
+  // If price is already 0.5% above open with 2 min left, DOWN needs a
+  // massive reversal — that bet has very low probability regardless of
+  // which way price is moving RIGHT NOW.
+  //
+  // We model the probability of crossing back over the open using:
+  //   - cushion: how far price currently is from window open (%)
+  //   - atr:     daily ATR as a proxy for per-minute expected move range
+  //   - minsLeft: time remaining in the window
+  //
+  // Expected move remaining = atr * sqrt(minsLeft/390) * 100
+  // (390 trading minutes/day; sqrt scaling = random walk approximation)
+  // crossProb = how likely price reverses enough to cross open
+  // When cushion >> expectedMove, the side WITH the cushion is very safe.
+
+  const atrPct        = state.atr || 3;           // daily ATR %
+  const perMinVol     = (atrPct / 100) / Math.sqrt(390); // per-minute std dev
+  const expectedMove  = perMinVol * Math.sqrt(Math.max(minsLeft, 0.5)) * 100; // % expected remaining move
+  const cushionRatio  = expectedMove > 0 ? absPct / expectedMove : 0;
+
+  // crossProb: rough probability that price CROSSES BACK over the open
+  // At cushionRatio=0 (at open): 50% chance either way
+  // At cushionRatio=1 (cushion = expected move): ~25% chance of reversal
+  // At cushionRatio=2+: very unlikely reversal (<10%)
+  const crossProb = clamp(0.5 * Math.exp(-cushionRatio * 0.9), 0.03, 0.50);
+
+  // Cushion confidence bonus for the side that HAS the cushion
+  // e.g. price 0.4% above open → UP side gets a bonus, DOWN gets penalized
+  const cushionBonus   = clamp((1 - crossProb * 2) * 25, 0, 25);  // 0–25pts bonus
+  const cushionPenalty = clamp(crossProb * 40, 0, 30);             // 0–30pts penalty on opposite side
+
+  const cushionFavorsUp   = pctMove > 0;  // price above open → UP has cushion
+  const cushionFavorsDown = pctMove < 0;  // price below open → DOWN has cushion
+
+  // volStrong requires stats AND volume above threshold
+  const volStrong = statsLoaded && volPct >= settings.volThresh;
+
+  // Volume penalty: low volume = less reliable signal
+  const volPenalty = statsLoaded && !volStrong
+    ? clamp((settings.volThresh - volPct) / settings.volThresh * 20, 0, 20)
+    : 0;
 
   let mom=0;
   if(priceHistory.length>=6){
@@ -1145,6 +1206,7 @@ function updateVerdict(){
   const todBias=state.todBias||0;
   const todVolBoost=state.todVolMulti||1;
 
+  // Base directional scores (momentum, order book, trend, session)
   const bullScore =
     (pctMove>0 ? absPct*35 : 0) +
     (mom>0 ? absMom*25 : 0) +
@@ -1166,30 +1228,65 @@ function updateVerdict(){
   const hasMove=absPct>=cfg.minPct;
   const passVol=!cfg.volReq||volStrong;
 
-  if(!hasMove&&!cfg.alwaysFire){
+  if(!statsLoaded && (riskMode==='low'||riskMode==='med')){
+    sig='wait'; conf=0;
+    reasons=['Waiting for 24h market stats to load before LOW/MED signals can fire…'];
+  } else if(!hasMove&&!cfg.alwaysFire){
     sig='wait';conf=0;
-    reasons=['Price only '+absPct.toFixed(3)+'% from window open — not enough movement','Switch to MEDIUM or HIGH RISK for a signal on small moves'];
+    reasons=['Price only '+absPct.toFixed(3)+'% from window open — not enough movement'];
   } else if(!passVol&&!cfg.alwaysFire){
     sig='wait';conf=0;
-    reasons=['Volume at '+volPct.toFixed(2)+'% of average — below '+settings.volThresh+'% threshold','Low-volume signals fail more often on Kalshi'];
+    reasons=['Volume at '+volPct.toFixed(2)+'% of average — below threshold. Low-volume signals fail more often on Kalshi.'];
   } else {
-    sig=net>=0?'up':'down';
-    const mB=clamp(absPct*300,0,30);
-    const momB=clamp(absMom*200,0,20);
-    const vB=volStrong?10:0;
-    const tB=trend!==0&&((trend>0&&sig==='up')||(trend<0&&sig==='down'))?8:0;
-    const obB=obSig!==0&&((obSig>0&&sig==='up')||(obSig<0&&sig==='down'))?(obStrong?15:8):0;
-    const todB=Math.abs(todBias)>0.2&&((todBias>0&&sig==='up')||(todBias<0&&sig==='down'))?clamp(Math.abs(todBias)*10,0,12):0;
-    const rawConf=cfg.confFloor+mB+momB+vB+tB+obB+todB;
-    // Apply time penalty — confidence decays in last 10 minutes of window
-    conf=clamp(Math.round((rawConf - timePenalty)*cfg.scale),cfg.confFloor,95);
+    // Determine direction from base score first
+    sig = net >= 0 ? 'up' : 'down';
 
+    // Now apply cushion model AFTER direction is determined:
+    // The side WITH the cushion gets a bonus; the side AGAINST it gets penalized.
+    const cushionBonusForSig    = (sig==='up'&&cushionFavorsUp)||(sig==='down'&&cushionFavorsDown) ? cushionBonus : 0;
+    const cushionPenaltyForSig  = (sig==='up'&&cushionFavorsDown)||(sig==='down'&&cushionFavorsUp) ? cushionPenalty : 0;
+
+    // If cushion is strongly against the signal direction, flip to the safer side
+    // e.g. price is 0.4% above open but base score says DOWN — that's fighting the cushion
+    if(cushionPenaltyForSig > 20 && cushionBonus > 15) {
+      sig = sig === 'up' ? 'down' : 'up';
+      reasons.push(`⚠️ Signal flipped — base momentum said ${sig==='up'?'DOWN':'UP'} but price is too far ${pctMove>0?'above':'below'} open for that reversal to be likely`);
+    }
+
+    const mB   = clamp(absPct*300,0,30);
+    const momB = clamp(absMom*200,0,20);
+    const vB   = volStrong?10:0;
+    const tB   = trend!==0&&((trend>0&&sig==='up')||(trend<0&&sig==='down'))?8:0;
+    const obB  = obSig!==0&&((obSig>0&&sig==='up')||(obSig<0&&sig==='down'))?(obStrong?15:8):0;
+    const todB = Math.abs(todBias)>0.2&&((todBias>0&&sig==='up')||(todBias<0&&sig==='down'))?clamp(Math.abs(todBias)*10,0,12):0;
+
+    // Re-calc cushion for potentially flipped sig
+    const finalCushionBonus   = (sig==='up'&&cushionFavorsUp)||(sig==='down'&&cushionFavorsDown) ? cushionBonus : 0;
+    const finalCushionPenalty = (sig==='up'&&cushionFavorsDown)||(sig==='down'&&cushionFavorsUp) ? cushionPenalty : 0;
+
+    const rawConf = cfg.confFloor + mB + momB + vB + tB + obB + todB
+                    + finalCushionBonus - finalCushionPenalty;
+    conf = clamp(Math.round((rawConf - timePenalty - volPenalty) * cfg.scale), cfg.confFloor, 95);
+
+    // Build reasons
     if(pctMove!==0) reasons.push(`Price ${sig==='up'?'up':'down'} ${absPct.toFixed(3)}% from window open`);
-    if(absMom>0.005) reasons.push(`${mom>0?'Upward':'Downward'} momentum (${(absMom*100).toFixed(3)}% acceleration)`);
+
+    // Cushion reason — most important new factor
+    if(cushionRatio > 0.3) {
+      const safeSide = pctMove>0 ? 'UP' : 'DOWN';
+      const pctToOpen = absPct.toFixed(3);
+      const expM = expectedMove.toFixed(3);
+      reasons.push(`Cushion: ${pctToOpen}% from open vs ${expM}% expected remaining move — ${safeSide} is structurally safer (${(crossProb*100).toFixed(0)}% reversal prob)`);
+    }
+
+    if(absMom>0.005) reasons.push(`${mom>0?'Upward':'Downward'} momentum (${(absMom*100).toFixed(3)}%)`);
     if(obSig!==0) reasons.push(obSig>0?`Order book ${state.buyPct.toFixed(2)}% buys — buy pressure`:`Order book ${state.sellPct.toFixed(2)}% sells — sell pressure`);
     if(Math.abs(todBias)>0.2) reasons.push(`${state.todSession} historically ${todBias>0?'bullish':'bearish'}`);
     if(trend!==0) reasons.push(`24h trend ${trend>0?'bullish +'+Math.abs(state.change||0).toFixed(2)+'%':'bearish '+(state.change||0).toFixed(2)+'%'}`);
     reasons.push(volStrong?`Volume ${volPct.toFixed(2)}% of avg — confirmed`:`Volume ${volPct.toFixed(2)}% — below threshold`);
+    if(volPenalty>0) reasons.push(`⚠️ Low volume -${volPenalty.toFixed(1)}pts`);
+    if(finalCushionBonus>5) reasons.push(`✅ Cushion bonus +${finalCushionBonus.toFixed(0)}pts — price well clear of open`);
+    if(finalCushionPenalty>5) reasons.push(`⚠️ Cushion penalty -${finalCushionPenalty.toFixed(0)}pts — fighting the open price gap`);
     if(isTooEarly) reasons.push(`⏳ Only ${minsElapsed.toFixed(1)} min into window — still building data`);
     if(isLate) reasons.push(`⚠️ Only ${minsLeft.toFixed(1)} min left — late signal, reduced edge`);
     if(timePenalty>0) reasons.push(`⏱ Time penalty -${timePenalty.toFixed(1)}pts (${minsLeft.toFixed(1)} min left)`);
@@ -1327,7 +1424,8 @@ function closeLiveNow(e){
   }
 }
 function computeLiveNow(){
-  const price=state.price,wOpen=state.windowOpen,volPct=state.volPct;
+  const price=state.price,wOpen=state.windowOpen;
+  const volPct=state.high24?(state.volPct||0):0;
   if(!price||!wOpen){$('liveNowContent').innerHTML='<div class="modal-loading">No live data yet.</div>';return;}
   const cfg=MODES['high'];
   const pctMove=((price-wOpen)/wOpen)*100,absPct=Math.abs(pctMove);
@@ -1722,6 +1820,11 @@ function copySnapshot() {
     `  Price ticks:     ${priceTicks}`,
     `  Signal streak:   ${signalStreak.count} consecutive ticks (${(signalStreak.count*3/60).toFixed(1)} min same dir)`,
     '',
+    '📐 CUSHION MODEL',
+    `  Price vs open:   ${state.windowOpen?(((state.price-state.windowOpen)/state.windowOpen)*100).toFixed(3)+'%':'--'}`,
+    `  Expected move:   ${state.atr?((state.atr/100/Math.sqrt(390))*Math.sqrt(Math.max(getWindows().secsLeft/60,0.5))*100).toFixed(3)+'% remaining':' --'}`,
+    `  Cushion favors:  ${state.windowOpen?(state.price>state.windowOpen?'UP (price above open)':state.price<state.windowOpen?'DOWN (price below open)':'NEUTRAL (at open)'):'--'}`,
+    '',
     '📊 SIGNALS',
     `  Momentum:        ${(state.momentum||0).toFixed(4)}% (+ = accel up)`,
     `  Order book:      ${(state.buyPct||50).toFixed(1)}% buys / ${(state.sellPct||50).toFixed(1)}% sells`,
@@ -1767,5 +1870,6 @@ buildSettings();
 updateTimer();
 startup();
 </script>
+
 </body>
 </html>
