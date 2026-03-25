@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTC ORB Pro v2 - Live Trading Dashboard</title>
+    <title>Kalshi ORB Trader - CF Benchmark Powered</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         * {
@@ -13,423 +13,479 @@
         }
 
         :root {
-            --bg-dark: #0a0e27;
-            --bg-darker: #050810;
-            --bg-card: #141829;
-            --bg-card-light: #1a1f35;
-            --accent-green: #00d084;
-            --accent-red: #ff4757;
-            --accent-blue: #0099ff;
-            --accent-gold: #ffa500;
-            --text-primary: #ffffff;
-            --text-secondary: #a0aec0;
-            --border-color: #2d3748;
-            --success: #2ed573;
-            --warning: #ffa502;
-            --danger: #ff4757;
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --tertiary: #334155;
+            --accent-cyan: #06b6d4;
+            --accent-lime: #84cc16;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border: #475569;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
         }
 
         html, body {
             width: 100%;
             height: 100%;
-            font-family: 'Trebuchet MS', sans-serif;
-            background: linear-gradient(135deg, var(--bg-darker) 0%, #0f1429 100%);
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1729 100%);
             color: var(--text-primary);
             overflow-x: hidden;
         }
 
+        body {
+            background-attachment: fixed;
+        }
+
         .container {
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 24px;
             min-height: 100vh;
         }
 
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(90deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6));
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-blue) 100%);
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-lime));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        .status-badge {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 6px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .logo-symbol {
-            font-size: 32px;
-        }
-
-        .time-display {
-            font-size: 14px;
-            color: var(--text-secondary);
-            text-align: right;
-        }
-
-        .time-display .time {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--accent-blue);
-            display: block;
-        }
-
-        .status-indicator {
-            display: inline-block;
+        .status-dot {
             width: 8px;
             height: 8px;
-            background: var(--accent-green);
+            background: var(--accent-lime);
             border-radius: 50%;
-            margin-right: 8px;
             animation: pulse 2s infinite;
         }
 
-        .status-indicator.offline {
-            background: var(--accent-red);
+        .status-dot.offline {
+            background: var(--accent-rose);
             animation: none;
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.4; }
         }
 
-        .main-grid {
+        /* Grid Layout */
+        .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
         }
 
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 20px rgba(0, 153, 255, 0.1);
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .chart-card {
+        .grid-full {
             grid-column: 1 / -1;
         }
 
-        .chart-container {
+        /* Card */
+        .card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8));
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        /* Chart */
+        .chart-wrapper {
             position: relative;
             height: 400px;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
         }
 
-        .price-controls {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
+        canvas {
+            max-height: 100%;
         }
 
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .input-group label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .input-group input {
-            background: var(--bg-darker);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 10px 12px;
-            color: var(--text-primary);
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 10px rgba(0, 153, 255, 0.2);
-        }
-
-        .stats-row {
+        /* Stats Grid */
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
-        .stat-box {
-            background: var(--bg-darker);
-            border: 1px solid var(--border-color);
+        .stat-item {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border);
             border-radius: 8px;
             padding: 12px;
             text-align: center;
         }
 
         .stat-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            font-family: 'Courier New', monospace;
+        }
+
+        .stat-value.green {
+            color: var(--accent-lime);
+        }
+
+        .stat-value.amber {
+            color: var(--accent-amber);
+        }
+
+        .stat-value.rose {
+            color: var(--accent-rose);
+        }
+
+        /* Confidence Box */
+        .confidence-box {
+            background: linear-gradient(135deg, rgba(132, 204, 22, 0.1), rgba(6, 182, 212, 0.1));
+            border: 2px solid var(--accent-lime);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .confidence-label {
             font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .confidence-value {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--accent-lime);
+            margin-bottom: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .confidence-subtext {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Metrics Breakdown */
+        .metrics-breakdown {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .metric {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .metric-name {
+            font-size: 10px;
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 6px;
         }
 
-        .stat-value {
-            font-size: 18px;
+        .metric-value {
+            font-size: 16px;
             font-weight: bold;
-            color: var(--accent-blue);
+            color: var(--accent-cyan);
         }
 
-        .stat-value.green {
-            color: var(--accent-green);
+        .metric-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(52, 65, 85, 0.5);
+            border-radius: 2px;
+            margin-top: 6px;
+            overflow: hidden;
         }
 
-        .stat-value.red {
-            color: var(--accent-red);
+        .metric-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-lime));
+            border-radius: 2px;
+            transition: width 0.3s ease;
         }
 
-        .prediction-box {
-            background: linear-gradient(135deg, rgba(0, 208, 132, 0.1) 0%, rgba(0, 153, 255, 0.1) 100%);
-            border: 2px solid var(--accent-green);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
-            text-align: center;
+        /* Bet Sizing */
+        .bet-section {
+            margin-bottom: 20px;
         }
 
-        .prediction-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .prediction-value {
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--accent-green);
-            margin-bottom: 8px;
-        }
-
-        .prediction-range {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .risk-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        .bet-input {
+            display: flex;
             gap: 12px;
+            margin-bottom: 16px;
         }
 
-        .risk-tier {
-            background: var(--bg-darker);
-            border: 2px solid var(--border-color);
+        .input-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-wrapper label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper input {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px 12px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 12px rgba(6, 182, 212, 0.2);
+        }
+
+        .bet-tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .bet-tier {
+            background: rgba(15, 23, 42, 0.7);
+            border: 2px solid var(--border);
             border-radius: 8px;
-            padding: 16px;
+            padding: 16px 12px;
             text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
-        .risk-tier:hover {
-            border-color: var(--accent-blue);
+        .bet-tier:hover {
+            border-color: var(--accent-cyan);
             transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
         }
 
-        .risk-tier.low {
-            border-color: var(--accent-green);
+        .bet-tier.low {
+            border-color: var(--accent-lime);
         }
 
-        .risk-tier.low:hover {
-            background: rgba(0, 208, 132, 0.1);
+        .bet-tier.medium {
+            border-color: var(--accent-amber);
         }
 
-        .risk-tier.medium {
-            border-color: var(--accent-gold);
+        .bet-tier.high {
+            border-color: var(--accent-rose);
         }
 
-        .risk-tier.medium:hover {
-            background: rgba(255, 165, 0, 0.1);
-        }
-
-        .risk-tier.high {
-            border-color: var(--accent-red);
-        }
-
-        .risk-tier.high:hover {
-            background: rgba(255, 71, 87, 0.1);
-        }
-
-        .risk-name {
-            font-size: 12px;
+        .bet-tier-label {
+            font-size: 10px;
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--text-secondary);
             margin-bottom: 8px;
         }
 
-        .risk-amount {
-            font-size: 24px;
+        .bet-tier-amount {
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            font-family: 'Courier New', monospace;
         }
 
-        .risk-low .risk-amount {
-            color: var(--accent-green);
+        .bet-tier.low .bet-tier-amount {
+            color: var(--accent-lime);
         }
 
-        .risk-medium .risk-amount {
-            color: var(--accent-gold);
+        .bet-tier.medium .bet-tier-amount {
+            color: var(--accent-amber);
         }
 
-        .risk-high .risk-amount {
-            color: var(--accent-red);
+        .bet-tier.high .bet-tier-amount {
+            color: var(--accent-rose);
         }
 
-        .risk-payout {
+        .bet-tier-odds {
             font-size: 11px;
             color: var(--text-secondary);
         }
 
+        /* Buttons */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn-lime {
+            background: linear-gradient(135deg, var(--accent-lime), #65a30d);
+            color: #000;
+            border: 1px solid var(--accent-lime);
+        }
+
+        .btn-lime:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(132, 204, 22, 0.4);
+        }
+
+        .btn-amber {
+            background: linear-gradient(135deg, var(--accent-amber), #d97706);
+            color: #000;
+            border: 1px solid var(--accent-amber);
+        }
+
+        .btn-amber:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-rose {
+            background: linear-gradient(135deg, var(--accent-rose), #e11d48);
+            color: white;
+            border: 1px solid var(--accent-rose);
+        }
+
+        .btn-rose:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(52, 65, 85, 0.5);
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(52, 65, 85, 0.8);
+        }
+
+        /* Trade History */
         .history-table {
             width: 100%;
+            font-size: 12px;
             border-collapse: collapse;
-            font-size: 13px;
         }
 
         .history-table thead {
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border);
         }
 
         .history-table th {
             padding: 12px;
             text-align: left;
-            color: var(--text-secondary);
+            color: var(--accent-cyan);
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            background: var(--bg-darker);
+            letter-spacing: 1px;
+            background: rgba(15, 23, 42, 0.5);
         }
 
         .history-table td {
             padding: 12px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
+            font-family: 'Courier New', monospace;
         }
 
         .history-table tr:hover {
-            background: var(--bg-darker);
+            background: rgba(6, 182, 212, 0.05);
         }
 
-        .profit.positive {
-            color: var(--accent-green);
+        .profit-positive {
+            color: var(--accent-lime);
             font-weight: bold;
         }
 
-        .profit.negative {
-            color: var(--accent-red);
+        .profit-negative {
+            color: var(--accent-rose);
             font-weight: bold;
         }
 
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            flex: 1;
-            min-width: 120px;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-blue) 0%, #0077cc 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 153, 255, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--bg-darker);
-            color: var(--accent-blue);
-            border: 1px solid var(--accent-blue);
-        }
-
-        .btn-secondary:hover {
-            background: var(--border-color);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--accent-green) 0%, #00a86b 100%);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 208, 132, 0.3);
-        }
-
-        .loading {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            margin-left: 5px;
-            animation: loading 1.4s infinite;
-        }
-
-        @keyframes loading {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        @media (max-width: 1024px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-            .risk-section {
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -437,177 +493,200 @@
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
-                gap: 15px;
+                gap: 16px;
                 text-align: center;
             }
-            .logo {
-                justify-content: center;
+
+            .metrics-breakdown {
+                grid-template-columns: 1fr;
             }
-            .price-controls {
-                flex-direction: column;
+
+            .bet-tiers {
+                grid-template-columns: 1fr;
             }
+
             .button-group {
-                flex-direction: column;
-            }
-            .btn {
-                width: 100%;
+                grid-template-columns: 1fr;
             }
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .feed-log {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            height: 200px;
+            overflow-y: auto;
+            font-size: 11px;
+            font-family: 'Courier New', monospace;
+            color: var(--text-secondary);
         }
 
-        .card {
-            animation: fadeIn 0.5s ease forwards;
+        .feed-line {
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(52, 65, 85, 0.3);
         }
 
-        .card:nth-child(1) { animation-delay: 0s; }
-        .card:nth-child(2) { animation-delay: 0.1s; }
-        .card:nth-child(3) { animation-delay: 0.2s; }
-        .card:nth-child(4) { animation-delay: 0.3s; }
-        .card:nth-child(5) { animation-delay: 0.4s; }
+        .feed-line.info {
+            color: var(--accent-cyan);
+        }
+
+        .feed-line.success {
+            color: var(--accent-lime);
+        }
+
+        .feed-line.warning {
+            color: var(--accent-amber);
+        }
+
+        .feed-line.error {
+            color: var(--accent-rose);
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <div class="header">
-            <div class="logo">
-                <span class="logo-symbol">₿</span>
-                <span>BTC ORB Pro v2</span>
-                <span class="status-indicator" id="statusIndicator"></span>
-                <span id="statusText" style="font-size: 14px; color: var(--text-secondary); margin-left: 10px;">Initializing...</span>
-            </div>
-            <div class="time-display">
-                <div class="time" id="currentTime">--:--:--</div>
-                <div>EST</div>
+            <div class="logo">⚡ KALSHI ORB</div>
+            <div class="status-badge">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Connecting to CF Benchmark...</span>
             </div>
         </div>
 
-        <div class="card chart-card">
-            <div class="card-title">15-Minute Candlestick Chart</div>
-            
-            <div class="price-controls">
-                <div class="input-group" style="flex: 1; min-width: 120px;">
-                    <label for="startingPrice">Override Starting Price ($)</label>
-                    <input type="number" id="startingPrice" placeholder="Leave blank for live price" step="0.01">
+        <!-- Main Grid -->
+        <div class="grid">
+            <!-- Left: Chart & Stats -->
+            <div>
+                <div class="card">
+                    <div class="card-title">15min OHLC Chart</div>
+                    <div class="chart-wrapper">
+                        <canvas id="orbChart"></canvas>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Open</div>
+                            <div class="stat-value" id="statOpen">--</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">High</div>
+                            <div class="stat-value green" id="statHigh">--</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Low</div>
+                            <div class="stat-value rose" id="statLow">--</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Current</div>
+                            <div class="stat-value" id="statCurrent">--</div>
+                        </div>
+                    </div>
                 </div>
-                <div style="display: flex; gap: 8px; align-items: flex-end;">
-                    <button class="btn btn-success" id="liveBtn" onclick="toggleLiveMode()" style="flex: 0; min-width: auto;">Start Live Mode</button>
-                    <button class="btn btn-secondary" onclick="updateChart()" style="flex: 0; min-width: auto;">Set Price</button>
+
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-title">Market Feed</div>
+                    <div class="feed-log" id="feedLog">
+                        <div class="feed-line info">● Waiting for CF Benchmark stream...</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="chart-container">
-                <canvas id="orbChart"></canvas>
-            </div>
+            <!-- Right: Confidence & Betting -->
+            <div>
+                <div class="card">
+                    <div class="card-title">NO Bet Confidence Score</div>
+                    
+                    <div class="confidence-box">
+                        <div class="confidence-label">Overall Confidence</div>
+                        <div class="confidence-value" id="confidenceScore">--</div>
+                        <div class="confidence-subtext">Weighted Score (0-100)</div>
+                    </div>
 
-            <div class="stats-row">
-                <div class="stat-box">
-                    <div class="stat-label">Opening Price</div>
-                    <div class="stat-value" id="openPrice">--</div>
+                    <div class="card-title" style="margin-top: 20px;">Metric Breakdown</div>
+                    <div class="metrics-breakdown">
+                        <div class="metric">
+                            <div class="metric-name">Volume</div>
+                            <div class="metric-value" id="volumeScore">--</div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" id="volumeFill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-name">Momentum</div>
+                            <div class="metric-value" id="momentumScore">--</div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" id="momentumFill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-name">Volatility</div>
+                            <div class="metric-value" id="volatilityScore">--</div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" id="volatilityFill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-label">Current Price</div>
-                    <div class="stat-value" id="currentPrice">--</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">High</div>
-                    <div class="stat-value green" id="highPrice">--</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Low</div>
-                    <div class="stat-value red" id="lowPrice">--</div>
+
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-title">NO Bet Sizing</div>
+                    
+                    <div class="bet-input">
+                        <div class="input-wrapper">
+                            <label for="bankroll">Bankroll ($)</label>
+                            <input type="number" id="bankroll" placeholder="1000" step="1" value="1000" oninput="updateBetSizing()">
+                        </div>
+                    </div>
+
+                    <div class="bet-tiers">
+                        <div class="bet-tier low">
+                            <div class="bet-tier-label">Low Risk</div>
+                            <div class="bet-tier-amount" id="lowBet">$0</div>
+                            <div class="bet-tier-odds" id="lowOdds">2.0x</div>
+                        </div>
+                        <div class="bet-tier medium">
+                            <div class="bet-tier-label">Med Risk</div>
+                            <div class="bet-tier-amount" id="medBet">$0</div>
+                            <div class="bet-tier-odds" id="medOdds">4.0x</div>
+                        </div>
+                        <div class="bet-tier high">
+                            <div class="bet-tier-label">High Risk</div>
+                            <div class="bet-tier-amount" id="highBet">$0</div>
+                            <div class="bet-tier-odds" id="highOdds">6.0x</div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-lime" onclick="placeBet('low')">Place Low</button>
+                        <button class="btn btn-amber" onclick="placeBet('medium')">Place Med</button>
+                        <button class="btn btn-rose" onclick="placeBet('high')">Place High</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="main-grid">
-            <div class="card">
-                <div class="card-title">ORB Prediction</div>
-                <div class="prediction-box">
-                    <div class="prediction-label">Predicted Direction</div>
-                    <div class="prediction-value" id="predictionDirection">--</div>
-                    <div class="prediction-range">
-                        Target Range: <span id="predictionRange">--</span>
-                    </div>
-                </div>
-
-                <div class="stats-row">
-                    <div class="stat-box">
-                        <div class="stat-label">Confidence</div>
-                        <div class="stat-value" id="confidence">--</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Signal Strength</div>
-                        <div class="stat-value" id="strength">--</div>
-                    </div>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-primary" onclick="refreshPrediction()">Refresh Prediction</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Recommended Bet Sizing</div>
-                
-                <div class="input-group" style="margin-bottom: 16px;">
-                    <label for="bankroll">Bankroll ($)</label>
-                    <input type="number" id="bankroll" placeholder="e.g., 1000" step="0.01" value="1000" oninput="updateBettingSizes()">
-                </div>
-
-                <div class="risk-section" id="riskSection">
-                    <div class="risk-tier low">
-                        <div class="risk-name">Low Risk</div>
-                        <div class="risk-amount" id="lowRiskBet">$0</div>
-                        <div class="risk-payout">Expected: <span id="lowRiskPayout">$0</span></div>
-                    </div>
-                    <div class="risk-tier medium">
-                        <div class="risk-name">Medium Risk</div>
-                        <div class="risk-amount" id="medRiskBet">$0</div>
-                        <div class="risk-payout">Expected: <span id="medRiskPayout">$0</span></div>
-                    </div>
-                    <div class="risk-tier high">
-                        <div class="risk-name">High Risk</div>
-                        <div class="risk-amount" id="highRiskBet">$0</div>
-                        <div class="risk-payout">Expected: <span id="highRiskPayout">$0</span></div>
-                    </div>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-primary" onclick="placeBet('low')">Place Low Risk Bet</button>
-                    <button class="btn btn-primary" onclick="placeBet('medium')">Place Med Risk Bet</button>
-                    <button class="btn btn-primary" onclick="placeBet('high')">Place High Risk Bet</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Cash Out History</div>
+        <!-- Trade History -->
+        <div class="card grid-full" style="margin-top: 24px;">
+            <div class="card-title">Trade History</div>
             <div style="overflow-x: auto;">
                 <table class="history-table">
                     <thead>
                         <tr>
                             <th>Time</th>
-                            <th>Direction</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Odds</th>
                             <th>Entry</th>
                             <th>Exit</th>
-                            <th>Stake</th>
-                            <th>Profit/Loss</th>
+                            <th>P&L</th>
                             <th>ROI</th>
                         </tr>
                     </thead>
                     <tbody id="historyBody">
                         <tr>
-                            <td colspan="7" style="text-align: center; color: var(--text-secondary);">No trades yet. Place a bet to get started!</td>
+                            <td colspan="8" style="text-align: center; color: var(--text-secondary);">No trades yet</td>
                         </tr>
                     </tbody>
                 </table>
@@ -616,212 +695,265 @@
     </div>
 
     <script>
-        let state = {
+        // ============ STATE & WEBSOCKET ============
+        const state = {
             startingPrice: null,
             currentPrice: null,
             high: null,
             low: null,
-            prediction: null,
-            history: [],
             ohlcData: [],
-            liveMode: false,
-            priceHistory: []
+            priceHistory: [],
+            trades: [],
+            confidenceMetrics: {
+                volume: 0,
+                momentum: 0,
+                volatility: 0,
+                overall: 0
+            }
         };
 
-        let priceUpdateInterval = null;
-        let orbChartInstance = null;
+        let ws = null;
+        let chartInstance = null;
+        let reconnectAttempts = 0;
+        const maxReconnect = 5;
 
-        // Load state from localStorage
-        function loadState() {
-            const saved = localStorage.getItem('btcOrbProState');
-            if (saved) {
-                state = JSON.parse(saved);
-                state.liveMode = false;
-                state.priceHistory = [];
-                renderHistory();
-                updateBettingSizes();
-            }
-        }
-
-        function saveState() {
-            localStorage.setItem('btcOrbProState', JSON.stringify(state));
-        }
-
-        // Fetch BTC price from CoinGecko (NO API KEY REQUIRED)
-        async function fetchBTCPrice() {
+        // ============ CF BENCHMARK WEBSOCKET ============
+        function connectWebSocket() {
             try {
-                const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false');
-                const data = await response.json();
-                return data.bitcoin.usd;
-            } catch (error) {
-                console.error('Error fetching BTC price:', error);
-                updateStatus('Offline', false);
-                return null;
+                // CF Benchmark BTC/USD real-time price feed
+                ws = new WebSocket('wss://www.cryptofacilities.com/ws/derivatives');
+                
+                ws.onopen = () => {
+                    console.log('Connected to CF Benchmark');
+                    reconnectAttempts = 0;
+                    updateStatus('Live from CF Benchmark', true);
+                    logFeed('Connected to CF Benchmark stream', 'success');
+                    
+                    // Subscribe to BTC price feed
+                    ws.send(JSON.stringify({
+                        event: 'subscribe',
+                        feed: 'ticker',
+                        product_ids: ['PI_XBTUSD']
+                    }));
+                };
+
+                ws.onmessage = (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        
+                        if (data.product_id === 'PI_XBTUSD' && data.bid && data.ask) {
+                            const price = (parseFloat(data.bid) + parseFloat(data.ask)) / 2;
+                            processPrice(price, data);
+                        }
+                    } catch (e) {
+                        console.error('Parse error:', e);
+                    }
+                };
+
+                ws.onerror = (error) => {
+                    console.error('WebSocket error:', error);
+                    logFeed('WebSocket error - retrying...', 'error');
+                    updateStatus('Connection Error', false);
+                };
+
+                ws.onclose = () => {
+                    console.log('Disconnected from CF Benchmark');
+                    updateStatus('Disconnected', false);
+                    logFeed('Disconnected from stream', 'warning');
+                    
+                    if (reconnectAttempts < maxReconnect) {
+                        reconnectAttempts++;
+                        setTimeout(connectWebSocket, 3000);
+                    }
+                };
+            } catch (e) {
+                console.error('WebSocket connection failed:', e);
+                updateStatus('Failed to Connect', false);
+                logFeed(`Connection failed: ${e.message}`, 'error');
             }
         }
 
-        // Update status indicator
-        function updateStatus(text, online = true) {
-            const indicator = document.getElementById('statusIndicator');
-            const statusText = document.getElementById('statusText');
-            statusText.textContent = text;
-            if (online) {
-                indicator.classList.remove('offline');
-            } else {
-                indicator.classList.add('offline');
-            }
-        }
-
-        // Toggle live mode
-        async function toggleLiveMode() {
-            if (state.liveMode) {
-                state.liveMode = false;
-                clearInterval(priceUpdateInterval);
-                document.getElementById('liveBtn').textContent = 'Start Live Mode';
-                updateStatus('Manual Mode', true);
-                return;
-            }
-
-            updateStatus('Connecting...', true);
-            const price = await fetchBTCPrice();
-            
-            if (price) {
-                state.liveMode = true;
+        // ============ PRICE PROCESSING ============
+        function processPrice(price, rawData) {
+            if (!state.startingPrice) {
                 state.startingPrice = price;
-                state.currentPrice = price;
                 state.high = price;
                 state.low = price;
-                state.priceHistory = [{ price: price, time: new Date() }];
-                document.getElementById('startingPrice').value = '';
-                document.getElementById('startingPrice').placeholder = `Live: $${price.toFixed(2)}`;
-                
                 initializeCandleData();
-                calculatePrediction();
-                updatePriceDisplay();
-                
-                document.getElementById('liveBtn').textContent = 'Stop Live Mode';
-                updateStatus('Live Mode Active', true);
-                
-                // Update price every 5 seconds
-                priceUpdateInterval = setInterval(updateLivePrice, 5000);
             }
+
+            state.currentPrice = price;
+            state.high = Math.max(state.high, price);
+            state.low = Math.min(state.low, price);
+            state.priceHistory.push({
+                price: price,
+                timestamp: Date.now(),
+                volume: rawData.trd_volume || 0
+            });
+
+            updateStats();
+            updateChart();
+            calculateConfidence();
+            updateBetSizing();
         }
 
-        // Update live price
-        async function updateLivePrice() {
-            const price = await fetchBTCPrice();
-            if (price) {
-                state.currentPrice = price;
-                state.high = Math.max(state.high || price, price);
-                state.low = Math.min(state.low || price, price);
-                state.priceHistory.push({ price: price, time: new Date() });
-                
-                updatePriceDisplay();
-                updateLiveChart();
-                calculatePrediction();
-            }
-        }
-
-        // Initialize candle data
         function initializeCandleData() {
             const candles = [];
-            const now = new Date();
+            const now = Date.now();
             
             for (let i = 14; i >= 0; i--) {
-                const candleTime = new Date(now.getTime() - i * 60000);
+                const time = now - (i * 60000);
                 const basePrice = state.startingPrice + (Math.random() - 0.5) * 200;
                 const high = basePrice + Math.random() * 150;
                 const low = basePrice - Math.random() * 150;
                 const close = low + Math.random() * (high - low);
                 
                 candles.push({
+                    time: new Date(time).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
                     open: basePrice,
                     high: high,
                     low: low,
                     close: close,
-                    time: `${String(candleTime.getHours()).padStart(2, '0')}:${String(candleTime.getMinutes()).padStart(2, '0')}`
+                    volume: Math.random() * 10000
                 });
             }
             
             state.ohlcData = candles;
-            drawCandleChart();
+            drawChart();
         }
 
-        // Update live chart
-        function updateLiveChart() {
-            if (state.priceHistory.length === 0 || !state.ohlcData.length) return;
+        // ============ CONFIDENCE CALCULATION ============
+        function calculateConfidence() {
+            if (state.priceHistory.length < 2) return;
+
+            // 1. VOLUME SCORE (20 highest volume = highest confidence)
+            const recentVolumes = state.priceHistory.slice(-20).map(p => p.volume);
+            const avgVolume = recentVolumes.reduce((a, b) => a + b) / recentVolumes.length;
+            const currentVolume = state.priceHistory[state.priceHistory.length - 1].volume;
+            const volumeScore = Math.min(100, (currentVolume / (avgVolume || 1)) * 50);
+
+            // 2. MOMENTUM SCORE (price acceleration in first few minutes)
+            const recentPrices = state.priceHistory.slice(-10).map(p => p.price);
+            const priceChange = recentPrices[recentPrices.length - 1] - recentPrices[0];
+            const avgPrice = recentPrices.reduce((a, b) => a + b) / recentPrices.length;
+            const momentum = (priceChange / avgPrice) * 100;
+            const momentumScore = Math.max(0, Math.min(100, 50 + (momentum * 10)));
+
+            // 3. VOLATILITY SCORE (range breakout probability)
+            const range = state.high - state.low;
+            const rangePercent = (range / state.startingPrice) * 100;
+            const volatilityScore = Math.min(100, rangePercent * 10);
+
+            // WEIGHTED CONFIDENCE
+            // High volume = 35%, Momentum = 40%, Volatility = 25%
+            const weighted = (volumeScore * 0.35) + (momentumScore * 0.40) + (volatilityScore * 0.25);
             
-            const now = new Date();
-            const lastCandle = state.ohlcData[state.ohlcData.length - 1];
-            const candleStartTime = new Date(now.getTime() - 60000);
+            state.confidenceMetrics = {
+                volume: Math.round(volumeScore),
+                momentum: Math.round(momentumScore),
+                volatility: Math.round(volatilityScore),
+                overall: Math.round(weighted)
+            };
+
+            updateConfidenceUI();
+        }
+
+        function updateConfidenceUI() {
+            const { volume, momentum, volatility, overall } = state.confidenceMetrics;
             
-            const currentCandlePrices = state.priceHistory
-                .filter(p => new Date(p.time) >= candleStartTime)
-                .map(p => p.price);
+            document.getElementById('confidenceScore').textContent = overall + '%';
+            document.getElementById('volumeScore').textContent = volume + '%';
+            document.getElementById('momentumScore').textContent = momentum + '%';
+            document.getElementById('volatilityScore').textContent = volatility + '%';
             
-            if (currentCandlePrices.length > 0) {
-                lastCandle.open = currentCandlePrices[0];
-                lastCandle.high = Math.max(...currentCandlePrices);
-                lastCandle.low = Math.min(...currentCandlePrices);
-                lastCandle.close = currentCandlePrices[currentCandlePrices.length - 1];
+            document.getElementById('volumeFill').style.width = volume + '%';
+            document.getElementById('momentumFill').style.width = momentum + '%';
+            document.getElementById('volatilityFill').style.width = volatility + '%';
+        }
+
+        // ============ BET SIZING ============
+        function updateBetSizing() {
+            const bankroll = parseFloat(document.getElementById('bankroll').value) || 1000;
+            const confidence = state.confidenceMetrics.overall / 100;
+
+            // Kelly Criterion adjusted sizing
+            // Low: 2% of bankroll
+            // Medium: 5% of bankroll, adjusted by confidence
+            // High: 10% of bankroll, adjusted by confidence
+
+            const lowBet = bankroll * 0.02;
+            const medBet = bankroll * 0.05 * Math.min(1, confidence + 0.5);
+            const highBet = bankroll * 0.10 * Math.min(1.5, confidence + 0.7);
+
+            // Odds scale based on confidence
+            // Higher confidence = better odds
+            const lowOdds = (2 + (confidence * 2)).toFixed(2);
+            const medOdds = (4 + (confidence * 3)).toFixed(2);
+            const highOdds = (6 + (confidence * 4)).toFixed(2);
+
+            document.getElementById('lowBet').textContent = '$' + lowBet.toFixed(2);
+            document.getElementById('medBet').textContent = '$' + medBet.toFixed(2);
+            document.getElementById('highBet').textContent = '$' + highBet.toFixed(2);
+            
+            document.getElementById('lowOdds').textContent = lowOdds + 'x';
+            document.getElementById('medOdds').textContent = medOdds + 'x';
+            document.getElementById('highOdds').textContent = highOdds + 'x';
+
+            // Store for bet placement
+            state.betSizes = {
+                low: { amount: lowBet, odds: parseFloat(lowOdds) },
+                medium: { amount: medBet, odds: parseFloat(medOdds) },
+                high: { amount: highBet, odds: parseFloat(highOdds) }
+            };
+        }
+
+        // ============ BET PLACEMENT ============
+        function placeBet(tier) {
+            if (!state.betSizes || !state.currentPrice) {
+                alert('Waiting for market data...');
+                return;
             }
+
+            const bet = state.betSizes[tier === 'medium' ? 'medium' : tier];
+            const odds = bet.odds;
+            const entry = state.currentPrice;
             
-            drawCandleChart();
+            // Simulate outcome based on confidence
+            const confidence = state.confidenceMetrics.overall / 100;
+            const winChance = confidence * 0.9; // 90% of confidence is realistic
+            const won = Math.random() < winChance;
+
+            const payout = won ? bet.amount * odds : 0;
+            const pl = payout - bet.amount;
+            const roi = ((pl / bet.amount) * 100).toFixed(1);
+
+            const trade = {
+                time: new Date().toLocaleTimeString(),
+                type: 'NO',
+                amount: bet.amount.toFixed(2),
+                odds: odds.toFixed(2),
+                entry: entry.toFixed(2),
+                exit: (entry + (won ? Math.random() * 500 : -Math.random() * 500)).toFixed(2),
+                pl: pl.toFixed(2),
+                roi: roi,
+                won: won
+            };
+
+            state.trades.unshift(trade);
+            renderHistory();
+            logFeed(`${won ? '✓' : '✗'} NO Bet Placed: $${bet.amount.toFixed(2)} @ ${odds.toFixed(2)}x | P&L: ${won ? '+' : ''}$${pl.toFixed(2)}`, won ? 'success' : 'error');
         }
 
-        // Update time display
-        function updateTime() {
-            const now = new Date();
-            document.getElementById('currentTime').textContent = now.toLocaleTimeString('en-US', {
-                hour12: false,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
-
-        // Update chart
-        function updateChart() {
-            const priceInput = document.getElementById('startingPrice').value;
-            if (priceInput) {
-                state.startingPrice = parseFloat(priceInput);
-                state.currentPrice = parseFloat(priceInput);
-                state.high = parseFloat(priceInput);
-                state.low = parseFloat(priceInput);
-                state.priceHistory = [{ price: parseFloat(priceInput), time: new Date() }];
-                state.liveMode = false;
-                clearInterval(priceUpdateInterval);
-                document.getElementById('liveBtn').textContent = 'Start Live Mode';
-                
-                initializeCandleData();
-                calculatePrediction();
-                updateStatus('Manual Mode', true);
-            } else {
-                alert('Enter a price or click "Start Live Mode" to fetch live data');
-            }
-        }
-
-        // Update price display
-        function updatePriceDisplay() {
-            if (!state.startingPrice) return;
-            document.getElementById('openPrice').textContent = '$' + state.startingPrice.toFixed(2);
-            document.getElementById('currentPrice').textContent = '$' + state.currentPrice.toFixed(2);
-            document.getElementById('highPrice').textContent = '$' + (state.high || state.startingPrice).toFixed(2);
-            document.getElementById('lowPrice').textContent = '$' + (state.low || state.startingPrice).toFixed(2);
-        }
-
-        // Draw candlestick chart
-        function drawCandleChart() {
+        // ============ CHART ============
+        function drawChart() {
             if (!state.ohlcData.length) return;
-            
+
             const ctx = document.getElementById('orbChart').getContext('2d');
             const labels = state.ohlcData.map(d => d.time);
-            
-            if (orbChartInstance) orbChartInstance.destroy();
 
-            orbChartInstance = new Chart(ctx, {
+            if (chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
                 type: 'candlestick',
                 data: {
                     labels: labels,
@@ -839,159 +971,76 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
-                        x: {
-                            type: 'linear',
-                            ticks: { color: 'rgba(160, 174, 192, 0.7)' },
-                            grid: { color: 'rgba(45, 55, 72, 0.3)' }
-                        },
-                        y: {
-                            ticks: { color: 'rgba(160, 174, 192, 0.7)' },
-                            grid: { color: 'rgba(45, 55, 72, 0.3)' }
-                        }
+                        x: { type: 'linear', ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(52, 65, 85, 0.2)' } },
+                        y: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(52, 65, 85, 0.2)' } }
                     }
                 }
             });
         }
 
-        // Calculate prediction
-        function calculatePrediction() {
-            if (!state.ohlcData.length) return;
-            
-            const candles = state.ohlcData;
-            const recentCandle = candles[candles.length - 1];
-            const range = state.high - state.low;
-            
-            const direction = recentCandle.close >= recentCandle.open ? '↑ UP' : '↓ DOWN';
-            const confidence = (60 + Math.random() * 25).toFixed(0);
-            const strength = Math.random() > 0.4 ? 'STRONG' : 'MODERATE';
-            const targetRange = (range * 1.5).toFixed(2);
-            
-            state.prediction = { direction, confidence, strength, targetRange };
-            
-            document.getElementById('predictionDirection').textContent = direction;
-            document.getElementById('predictionRange').textContent = `±$${targetRange}`;
-            document.getElementById('confidence').textContent = confidence + '%';
-            document.getElementById('strength').textContent = strength;
-            
-            updatePayouts(direction, parseFloat(confidence));
+        function updateChart() {
+            if (!chartInstance || !state.ohlcData.length) return;
+            drawChart();
         }
 
-        function refreshPrediction() {
-            if (!state.startingPrice) {
-                alert('Set a price or start live mode first');
-                return;
+        // ============ UI HELPERS ============
+        function updateStats() {
+            if (!state.startingPrice) return;
+            document.getElementById('statOpen').textContent = '$' + state.startingPrice.toFixed(2);
+            document.getElementById('statHigh').textContent = '$' + state.high.toFixed(2);
+            document.getElementById('statLow').textContent = '$' + state.low.toFixed(2);
+            document.getElementById('statCurrent').textContent = '$' + state.currentPrice.toFixed(2);
+        }
+
+        function updateStatus(text, online) {
+            document.getElementById('statusText').textContent = text;
+            const dot = document.getElementById('statusDot');
+            if (online) {
+                dot.classList.remove('offline');
+            } else {
+                dot.classList.add('offline');
             }
-            calculatePrediction();
         }
 
-        // Betting sizes
-        function updateBettingSizes() {
-            const bankroll = parseFloat(document.getElementById('bankroll').value) || 1000;
-            const lowBet = (bankroll * 0.02).toFixed(2);
-            const medBet = (bankroll * 0.05).toFixed(2);
-            const highBet = (bankroll * 0.10).toFixed(2);
-
-            document.getElementById('lowRiskBet').textContent = '$' + lowBet;
-            document.getElementById('medRiskBet').textContent = '$' + medBet;
-            document.getElementById('highRiskBet').textContent = '$' + highBet;
-
-            document.getElementById('lowRiskPayout').textContent = '$' + (parseFloat(lowBet) * 2).toFixed(2);
-            document.getElementById('medRiskPayout').textContent = '$' + (parseFloat(medBet) * 4).toFixed(2);
-            document.getElementById('highRiskPayout').textContent = '$' + (parseFloat(highBet) * 8).toFixed(2);
-        }
-
-        function updatePayouts(direction, confidence) {
-            const bankroll = parseFloat(document.getElementById('bankroll').value) || 1000;
-            const lowBet = parseFloat(document.getElementById('lowRiskBet').textContent.replace('$', ''));
-            const medBet = parseFloat(document.getElementById('medRiskBet').textContent.replace('$', ''));
-            const highBet = parseFloat(document.getElementById('highRiskBet').textContent.replace('$', ''));
-
-            document.getElementById('lowRiskPayout').textContent = '$' + (lowBet * 2).toFixed(2);
-            document.getElementById('medRiskPayout').textContent = '$' + (medBet * 4).toFixed(2);
-            document.getElementById('highRiskPayout').textContent = '$' + (highBet * (3 + confidence / 20)).toFixed(2);
-        }
-
-        // Place bet
-        function placeBet(risk) {
-            if (!state.prediction) {
-                alert('Generate a prediction first');
-                return;
+        function logFeed(message, type = 'info') {
+            const feed = document.getElementById('feedLog');
+            const line = document.createElement('div');
+            line.className = `feed-line ${type}`;
+            line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            feed.appendChild(line);
+            feed.scrollTop = feed.scrollHeight;
+            
+            // Keep last 50 lines
+            while (feed.children.length > 50) {
+                feed.removeChild(feed.firstChild);
             }
-
-            const direction = state.prediction.direction.includes('UP') ? 'UP' : 'DOWN';
-            const amounts = {
-                low: parseFloat(document.getElementById('lowRiskBet').textContent.replace('$', '')),
-                medium: parseFloat(document.getElementById('medRiskBet').textContent.replace('$', '')),
-                high: parseFloat(document.getElementById('highRiskBet').textContent.replace('$', ''))
-            };
-
-            const stake = amounts[risk === 'medium' ? 'medium' : risk];
-            const time = new Date().toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' });
-
-            const winChance = parseFloat(state.prediction.confidence) / 100;
-            const won = Math.random() < winChance;
-
-            const payouts = {
-                low: stake * 2,
-                medium: stake * 4,
-                high: stake * (3 + parseFloat(state.prediction.confidence) / 20)
-            };
-
-            const payout = payouts[risk === 'medium' ? 'medium' : risk];
-            const profit = won ? (payout - stake) : -stake;
-            const roi = (profit / stake * 100).toFixed(1);
-
-            const trade = {
-                time,
-                direction,
-                entry: state.startingPrice.toFixed(2),
-                exit: (state.currentPrice + (won ? Math.random() * 200 : -Math.random() * 200)).toFixed(2),
-                stake: stake.toFixed(2),
-                profit: profit.toFixed(2),
-                roi: roi,
-                won
-            };
-
-            state.history.unshift(trade);
-            saveState();
-            renderHistory();
-
-            alert(`Trade ${won ? 'WON ✓' : 'LOST ✗'}!\n\nProfit: ${won ? '+' : ''}$${profit.toFixed(2)}\nROI: ${roi}%`);
         }
 
-        // Render history
         function renderHistory() {
             const body = document.getElementById('historyBody');
-
-            if (state.history.length === 0) {
-                body.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-secondary);">No trades yet. Place a bet to get started!</td></tr>';
+            if (!state.trades.length) {
+                body.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-secondary);">No trades yet</td></tr>';
                 return;
             }
 
-            body.innerHTML = state.history.map(trade => `
+            body.innerHTML = state.trades.map(t => `
                 <tr>
-                    <td>${trade.time}</td>
-                    <td><strong>${trade.direction}</strong></td>
-                    <td>$${trade.entry}</td>
-                    <td>$${trade.exit}</td>
-                    <td>$${trade.stake}</td>
-                    <td class="profit ${trade.profit > 0 ? 'positive' : 'negative'}">
-                        ${trade.profit > 0 ? '+' : ''}$${trade.profit}
-                    </td>
-                    <td class="${trade.roi > 0 ? 'positive' : 'negative'}" style="font-weight: bold;">
-                        ${trade.roi > 0 ? '+' : ''}${trade.roi}%
-                    </td>
+                    <td>${t.time}</td>
+                    <td>${t.type}</td>
+                    <td>$${t.amount}</td>
+                    <td>${t.odds}x</td>
+                    <td>$${t.entry}</td>
+                    <td>$${t.exit}</td>
+                    <td class="profit-${t.won ? 'positive' : 'negative'}">${t.won ? '+' : ''}$${t.pl}</td>
+                    <td class="profit-${t.won ? 'positive' : 'negative'}">${t.won ? '+' : ''}${t.roi}%</td>
                 </tr>
             `).join('');
         }
 
-        // Initialize
-        loadState();
-        updateBettingSizes();
+        // ============ INITIALIZATION ============
+        connectWebSocket();
     </script>
 </body>
 </html>
