@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BTC ORB PRO - FIXED</title>
+<style>
+body { font-family: Arial; background:#0b0f1a; color:white; text-align:center; }
+#btcPrice { font-size:48px; margin-top:40px; }
+#status { margin-top:10px; font-size:14px; color:#aaa; }
+</style>
+</head>
+<body>
+
+<h1>BTC ORB PRO (Fixed)</h1>
+<div id="btcPrice">$---</div>
+<div id="status">Connecting...</div>
+
+<script>
+// ─── STATE ─────────────────────────
+let state = { price:null, prevPrice:null };
+let lastPriceSource = '';
+let consecutivePriceFails = 0;
+
+// ─── SOURCES ───────────────────────
+const SOURCES = [
+  {
+    name: 'Binance',
+    url: 'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT',
+    parse: d => parseFloat(d.price)
+  },
+  {
+    name: 'Coinbase',
+    url: 'https://api.coinbase.com/v2/prices/BTC-USD/spot',
+    parse: d => parseFloat(d.data.amount)
+  },
+  {
+    name: 'Kraken',
+    url: 'https://api.kraken.com/0/public/Ticker?pair=XBTUSD',
+    parse: d => parseFloat(Object.values(d.result)[0].c[0])
+  }
+];
+
+// ─── FETCH SINGLE SOURCE ───────────
+async function fetchSource(source, timeout = 2500) {
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), timeout);
+
+    const r = await fetch(source.url, { signal: ctrl.signal });
+    clearTimeout(t);
+
+    if (!r.ok) throw new Error('Bad response');
+
+    const d = await r.json();
+    const price = source.parse(d);
+
+    if (!price || price < 1000) throw new Error('Invalid price');
+
+    return { price, label: source.name };
+  } catch (e) {
+    console.warn('❌', source.name, 'failed:', e.message);
+    return null;
+  }
+}
+
+// ─── RACE ──────────────────────────
+async function getLivePrice() {
+  return new Promise((resolve) => {
+    let resolved = false;
+
+    SOURCES.forEach(async (s) => {
+      const result = await fetchSource(s);
+      if (result && !resolved) {
+        resolved = true;
+        resolve(result);
+      }
+    });
+
+    setTimeout(async () => {
+      if (resolved) return;
+      try {
+        const r = await fetch('https://api.coinbase.com/v2/prices/BTC-USD/spot');
+        const d = await r.json();
+        resolve({
+          price: parseFloat(d.data.amount),
+          label: 'Coinbase (fallback)'
+        });
+      } catch {
+        resolve(null);
+      }
+    }, 4000);
+  });
+}
+
+// ─── STREAM PRICE ──────────────────
+async function streamPrice() {
+  const result = await getLivePrice();
+
+  if (!result) {
+    consecutivePriceFails++;
+    document.getElementById('status').textContent = "❌ No data ("+consecutivePriceFails+")";
+    return;
+  }
+
+  consecutivePriceFails = 0;
+  lastPriceSource = result.label;
+
+  const rawPrice = result.price;
+
+  const smoothed = state.price
+    ? (state.price * 0.7 + rawPrice * 0.3)
+    : rawPrice;
+
+  state.prevPrice = state.price;
+  state.price = smoothed;
+
+  document.getElementById('btcPrice').textContent =
+    '$' + Math.round(smoothed).toLocaleString();
+
+  document.getElementById('status').textContent =
+    '✅ ' + result.label + ' · ' + new Date().toLocaleTimeString();
+}
+
+// ─── LOOP ──────────────────────────
+setInterval(streamPrice, 3000);
+streamPrice();
+
+</script>
+
+</body>
+</html>
